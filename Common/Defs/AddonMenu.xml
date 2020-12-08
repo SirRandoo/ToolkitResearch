@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+    <ToolkitCore.Models.ToolkitAddon>
+        <defName>ToolkitResearch</defName>
+        <label>ToolkitResearch</label>
+        <menuClass>SirRandoo.ToolkitResearch.ResearchAddonMenu</menuClass>
+    </ToolkitCore.Models.ToolkitAddon>
+</Defs>

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<LanguageData>
+    <ToolkitResearch.Settings.Options.Label>Maxmimum number of choices</ToolkitResearch.Settings.Options.Label>
+    <ToolkitResearch.Settings.Options.Description>The maximum number of research options that will ever appear in a given poll.</ToolkitResearch.Settings.Options.Description>
+    
+    <ToolkitResearch.Settings.Duration.Label>Poll duration</ToolkitResearch.Settings.Duration.Label>
+    <ToolkitResearch.Settings.Duration.Description>The maximum number of seconds a poll will run for. While there is no limit to the amount of seconds you can put in this field, it's advised to keep it within reason.</ToolkitResearch.Settings.Duration.Description>
+    
+    <ToolkitResearch.Settings.OptionsInChat.Label>Send the current poll's options to chat.</ToolkitResearch.Settings.OptionsInChat.Label>
+    <ToolkitResearch.Settings.OptionsInChat.Description>Whether or not the mod will send the current poll's options to chat. Viewers can vote on these options by typing the number of the option they want to cast their vote for, or prefix it with #.</ToolkitResearch.Settings.OptionsInChat.Description>
+</LanguageData>
