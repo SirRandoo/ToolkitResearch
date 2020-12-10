@@ -33,6 +33,6 @@ namespace SirRandoo.ToolkitResearch.Models
             }
         }
 
-        public string VoteCountLabel { get; private set; }
+        public string VoteCountLabel { get; private set; } = "0";
     }
 }
