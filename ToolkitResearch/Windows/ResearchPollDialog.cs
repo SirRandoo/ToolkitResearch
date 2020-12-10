@@ -166,7 +166,7 @@ namespace SirRandoo.ToolkitResearch.Windows
 
                 SettingsHelper.DrawLabel(
                     line,
-                    $"<b>#{choice.IdLabel}</b>  {choice.Project!.LabelCap}: {choice.VoteCountLabel}"
+                    $"{choice.IdLabel}  {choice.Project!.LabelCap}: {choice.VoteCountLabel}"
                 );
                 TooltipHandler.TipRegion(line, choice.Project.description);
             }

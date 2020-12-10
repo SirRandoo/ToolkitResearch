@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using SirRandoo.ToolkitResearch.Helpers;
 using Verse;
 
 namespace SirRandoo.ToolkitResearch.Models
@@ -10,7 +11,7 @@ namespace SirRandoo.ToolkitResearch.Models
         public PollItem(int id)
         {
             Id = id;
-            IdLabel = id.ToString("N0");
+            IdLabel = $"#{id:N0}".Tagged("b");
 
             Voters.CollectionChanged += (sender, args) =>
             {
