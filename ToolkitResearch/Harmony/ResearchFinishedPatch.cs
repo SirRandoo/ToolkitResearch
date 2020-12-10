@@ -1,11 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using System.Reflection;
 using HarmonyLib;
 using JetBrains.Annotations;
 using RimWorld;
-using SirRandoo.ToolkitResearch.Windows;
 using Verse;
 
 namespace SirRandoo.ToolkitResearch.Harmony

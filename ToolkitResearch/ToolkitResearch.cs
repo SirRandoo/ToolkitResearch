@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using JetBrains.Annotations;
+﻿using JetBrains.Annotations;
 using SirRandoo.ToolkitResearch.Windows;
 using UnityEngine;
 using Verse;
@@ -24,7 +22,7 @@ namespace SirRandoo.ToolkitResearch
         {
             Settings.Draw(inRect);
         }
-        
+
         internal static void StartNewPoll(ResearchProjectDef project = null)
         {
             Find.WindowStack?.Add(new ResearchPollDialog(project));

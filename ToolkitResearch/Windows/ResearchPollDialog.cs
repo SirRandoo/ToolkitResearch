@@ -16,9 +16,10 @@ namespace SirRandoo.ToolkitResearch.Windows
     {
         private static readonly Gradient TimerGradient;
         private readonly List<PollItem> _choices = new List<PollItem>();
-        private Rect _contentRect;
+        private readonly bool _wasProjectCompleted;
         private string _completeText;
         private string _completeTitleText;
+        private Rect _contentRect;
         private string _loadingText;
         private int _marker;
         private bool _notified;
@@ -31,7 +32,6 @@ namespace SirRandoo.ToolkitResearch.Windows
         private Rect _timerRect;
         private float _totalVotes;
         private Rect _viewPort;
-        private readonly bool _wasProjectCompleted;
 
         static ResearchPollDialog()
         {
@@ -162,10 +162,11 @@ namespace SirRandoo.ToolkitResearch.Windows
             var idRect = new Rect(0f, line.y, choice.IdWidth, line.height);
             var projectRect = new Rect(idRect.width + 5f, line.y, choice.ProjectWidth, line.height);
             var voterRect = new Rect(line.width - choice.VoteCountWidth, line.y, choice.VoteCountWidth, line.height);
-            
+
             float chance = choice.VoteCount > 0 ? choice.VoteCount / _totalVotes : 0f;
             bool winner = drawWinner && choice.Project == Find.ResearchManager?.currentProj;
-            Rect progressRect = new Rect(line.x, line.y, line.width * (winner ? 1f : chance), line.height * 0.95f).Rounded();
+            Rect progressRect = new Rect(line.x, line.y, line.width * (winner ? 1f : chance), line.height * 0.95f)
+               .Rounded();
 
             if (winner)
             {

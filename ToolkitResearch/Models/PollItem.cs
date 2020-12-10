@@ -6,8 +6,8 @@ namespace SirRandoo.ToolkitResearch.Models
 {
     public class PollItem
     {
-        private int _voteCount;
         private ResearchProjectDef _project;
+        private int _voteCount;
 
         public PollItem(int id)
         {
@@ -15,10 +15,7 @@ namespace SirRandoo.ToolkitResearch.Models
             IdLabel = $"#{id:N0}".Tagged("b");
             IdWidth = Text.CalcSize(IdLabel).x;
 
-            Voters.CollectionChanged += (sender, args) =>
-            {
-                VoteCount = Voters.Count;
-            };
+            Voters.CollectionChanged += (sender, args) => VoteCount = Voters.Count;
 
             VoteCount = 0;
         }
@@ -53,6 +50,6 @@ namespace SirRandoo.ToolkitResearch.Models
         }
 
         public string VoteCountLabel { get; private set; }
-        public float VoteCountWidth {get; private set; }
+        public float VoteCountWidth { get; private set; }
     }
 }

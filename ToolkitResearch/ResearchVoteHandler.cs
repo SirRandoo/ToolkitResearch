@@ -34,7 +34,7 @@ namespace SirRandoo.ToolkitResearch
             {
                 return;
             }
-            
+
             string message = twitchMessage.Message;
 
             if (message.StartsWith("#"))
