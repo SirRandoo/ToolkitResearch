@@ -266,6 +266,11 @@ namespace SirRandoo.ToolkitResearch.Windows
                     optionalTitle = _pollTitleText.ColorTagged(ColorLibrary.LightGreen).Tagged("b");
                     _state = WindowState.Poll;
                     _timer = Settings.Duration;
+
+                #if DEBUG
+                    _timer = 10;
+                #endif
+
                     return;
                 case WindowState.Poll:
                     ChooseWinner();
