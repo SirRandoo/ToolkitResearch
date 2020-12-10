@@ -258,7 +258,7 @@ namespace SirRandoo.ToolkitResearch.Windows
             switch (_state)
             {
                 case WindowState.Layout:
-                    optionalTitle = _completeTitleText.ColorTagged(ColorLibrary.LightGreen).Tagged("b");
+                    SetTitle(_completeTitleText);
                     _state = WindowState.Research;
                     _timer = Settings.CompletedDuration;
 
@@ -270,7 +270,7 @@ namespace SirRandoo.ToolkitResearch.Windows
 
                     return;
                 case WindowState.Research:
-                    optionalTitle = _pollTitleText.ColorTagged(ColorLibrary.LightGreen).Tagged("b");
+                    SetTitle(_pollTitleText);
                     _state = WindowState.Poll;
                     _timer = Settings.Duration;
 
@@ -281,7 +281,7 @@ namespace SirRandoo.ToolkitResearch.Windows
                     return;
                 case WindowState.Poll:
                     ChooseWinner();
-                    optionalTitle = _resultsTitleText.ColorTagged(ColorLibrary.LightGreen).Tagged("b");
+                    SetTitle(_resultsTitleText);
                     _state = WindowState.Results;
                     _timer = Settings.ResultsDuration;
                     return;
@@ -289,6 +289,11 @@ namespace SirRandoo.ToolkitResearch.Windows
                     Close();
                     return;
             }
+        }
+
+        private void SetTitle(string text)
+        {
+            optionalTitle = text.ColorTagged(ColorLibrary.LightBlue).Tagged("b");
         }
 
         private void CalculateRegions(Rect canvas)
