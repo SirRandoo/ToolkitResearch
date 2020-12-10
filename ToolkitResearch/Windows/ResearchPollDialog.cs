@@ -150,29 +150,40 @@ namespace SirRandoo.ToolkitResearch.Windows
                     continue;
                 }
 
-                float chance = choice.VoteCount > 0 ? choice.VoteCount / _totalVotes : 0f;
-                bool winner = drawWinner && choice.Project == Find.ResearchManager?.currentProj;
-                Rect progressRect = new Rect(line.x, line.y, line.width * (winner ? 1f : chance), line.height * 0.95f)
-                   .Rounded();
-
-                if (winner)
-                {
-                    Widgets.DrawHighlightSelected(progressRect);
-                }
-                else
-                {
-                    Widgets.DrawLightHighlight(progressRect);
-                }
-
-                SettingsHelper.DrawLabel(
-                    line,
-                    $"{choice.IdLabel}  {choice.Project!.LabelCap}: {choice.VoteCountLabel}"
-                );
-                TooltipHandler.TipRegion(line, choice.Project.description);
+                DrawChoice(line, choice, drawWinner);
             }
 
             listing.End();
             listing.EndScrollView(ref _viewPort);
+        }
+
+        private void DrawChoice(Rect line, PollItem choice, bool drawWinner)
+        {
+            var idRect = new Rect(0f, line.y, choice.IdWidth, line.height);
+            var projectRect = new Rect(idRect.width + 5f, line.y, choice.ProjectWidth, line.height);
+            var voterRect = new Rect(line.width - choice.VoteCountWidth, line.y, choice.VoteCountWidth, line.height);
+            
+            float chance = choice.VoteCount > 0 ? choice.VoteCount / _totalVotes : 0f;
+            bool winner = drawWinner && choice.Project == Find.ResearchManager?.currentProj;
+            Rect progressRect = new Rect(line.x, line.y, line.width * (winner ? 1f : chance), line.height * 0.95f).Rounded();
+
+            if (winner)
+            {
+                Widgets.DrawHighlightSelected(progressRect);
+            }
+            else
+            {
+                Widgets.DrawLightHighlight(progressRect);
+            }
+
+            SettingsHelper.DrawLabel(idRect, choice.IdLabel);
+            SettingsHelper.DrawLabel(
+                projectRect,
+                choice.Project!.LabelCap,
+                fontScale: projectRect.width >= voterRect.x ? GameFont.Tiny : GameFont.Small
+            );
+            SettingsHelper.DrawLabel(voterRect, choice.VoteCountLabel);
+            TooltipHandler.TipRegion(line, choice.Project.description);
         }
 
         private void DrawTimer()

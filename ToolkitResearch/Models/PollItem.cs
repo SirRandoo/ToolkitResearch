@@ -7,21 +7,38 @@ namespace SirRandoo.ToolkitResearch.Models
     public class PollItem
     {
         private int _voteCount;
+        private ResearchProjectDef _project;
 
         public PollItem(int id)
         {
             Id = id;
             IdLabel = $"#{id:N0}".Tagged("b");
+            IdWidth = Text.CalcSize(IdLabel).x;
 
             Voters.CollectionChanged += (sender, args) =>
             {
                 VoteCount = Voters.Count;
             };
+
+            VoteCount = 0;
         }
 
         public int Id { get; }
         public string IdLabel { get; }
-        public ResearchProjectDef Project { get; set; }
+        public float IdWidth { get; }
+
+        public ResearchProjectDef Project
+        {
+            get => _project;
+            set
+            {
+                _project = value;
+                ProjectWidth = Text.CalcSize(_project.LabelCap).x;
+            }
+        }
+
+        public float ProjectWidth { get; private set; }
+
         public ObservableCollection<string> Voters { get; } = new ObservableCollection<string>();
 
         public int VoteCount
@@ -31,9 +48,11 @@ namespace SirRandoo.ToolkitResearch.Models
             {
                 _voteCount = value;
                 VoteCountLabel = _voteCount.ToString("N0");
+                VoteCountWidth = Text.CalcSize(VoteCountLabel).x;
             }
         }
 
-        public string VoteCountLabel { get; private set; } = "0";
+        public string VoteCountLabel { get; private set; }
+        public float VoteCountWidth {get; private set; }
     }
 }
