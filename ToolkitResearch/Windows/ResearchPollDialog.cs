@@ -250,7 +250,7 @@ namespace SirRandoo.ToolkitResearch.Windows
             switch (_state)
             {
                 case WindowState.Layout:
-                    optionalTitle = _completeTitleText;
+                    optionalTitle = _completeTitleText.ColorTagged(ColorLibrary.LightGreen).Tagged("b");
                     _state = WindowState.Research;
                     _timer = Settings.CompletedDuration;
 
@@ -262,13 +262,13 @@ namespace SirRandoo.ToolkitResearch.Windows
                     
                     return;
                 case WindowState.Research:
-                    optionalTitle = _pollTitleText;
+                    optionalTitle = _pollTitleText.ColorTagged(ColorLibrary.LightGreen).Tagged("b");
                     _state = WindowState.Poll;
                     _timer = Settings.Duration;
                     return;
                 case WindowState.Poll:
                     ChooseWinner();
-                    optionalTitle = _resultsTitleText;
+                    optionalTitle = _resultsTitleText.ColorTagged(ColorLibrary.LightGreen).Tagged("b");
                     _state = WindowState.Results;
                     _timer = Settings.ResultsDuration;
                     return;
