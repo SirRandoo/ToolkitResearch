@@ -161,7 +161,10 @@ namespace SirRandoo.ToolkitResearch.Windows
                     Widgets.DrawLightHighlight(progressRect);
                 }
 
-                SettingsHelper.DrawLabel(line, $"[{choice.IdLabel}] {choice.Project!.LabelCap}: {choice.VoteCountLabel}");
+                SettingsHelper.DrawLabel(
+                    line,
+                    $"[{choice.IdLabel}] {choice.Project!.LabelCap}: {choice.VoteCountLabel}"
+                );
             }
 
             listing.End();
