@@ -160,7 +160,7 @@ namespace SirRandoo.ToolkitResearch.Windows
                     GUI.color = Color.white;
                 }
 
-                SettingsHelper.DrawLabel(line, $"[{index + 1}] {choice.Project!.LabelCap}: {choice.VoteCount}");
+                SettingsHelper.DrawLabel(line, $"[{index + 1}] {choice.Project!.LabelCap}: {choice.VoteCountLabel}");
             }
 
             listing.End();
