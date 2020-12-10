@@ -2,8 +2,8 @@
 
 <LanguageData>
     <ToolkitResearch.Windows.Poll.CompleteTitle>Congratulations!</ToolkitResearch.Windows.Poll.CompleteTitle>
-    <ToolkitResearch.Windows.Poll.ResultsTitle>Here are the results!</ToolkitResearch.Windows.Poll.ResultsTitle>
-    <ToolkitResearch.Windows.Poll.PollTitle>Vote on the next research project!</ToolkitResearch.Windows.Poll.PollTitle>
+    <ToolkitResearch.Windows.Poll.ResultsTitle>Here are the results...</ToolkitResearch.Windows.Poll.ResultsTitle>
+    <ToolkitResearch.Windows.Poll.PollTitle>Vote on the next research project</ToolkitResearch.Windows.Poll.PollTitle>
     <ToolkitResearch.Windows.Poll.LoadingNextOptions>Loading next options..</ToolkitResearch.Windows.Poll.LoadingNextOptions>
-    <ToolkitResearch.Windows.Poll.ResearchComplete>Finished researching {0}!</ToolkitResearch.Windows.Poll.ResearchComplete>
+    <ToolkitResearch.Windows.Poll.ResearchComplete>You've finished researching {0}!</ToolkitResearch.Windows.Poll.ResearchComplete>
 </LanguageData>
