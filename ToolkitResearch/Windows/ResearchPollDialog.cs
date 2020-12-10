@@ -141,9 +141,8 @@ namespace SirRandoo.ToolkitResearch.Windows
             var listing = new Listing_Standard();
             listing.Begin(_contentRect);
             listing.BeginScrollView(_contentRect, ref _scrollPos, ref _viewPort);
-            for (var index = 0; index < _choices.Count; index++)
+            foreach (PollItem choice in _choices)
             {
-                PollItem choice = _choices[index];
                 Rect line = listing.GetRect(Text.LineHeight);
 
                 float chance = choice.VoteCount > 0 ? choice.VoteCount / _totalVotes : 0f;
