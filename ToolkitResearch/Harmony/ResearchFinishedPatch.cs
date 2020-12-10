@@ -22,7 +22,7 @@ namespace SirRandoo.ToolkitResearch.Harmony
         [SuppressMessage("ReSharper", "RedundantAssignment")]
         public static void Prefix(ref bool doCompletionDialog)
         {
-            doCompletionDialog = false;
+            doCompletionDialog = Settings.ShowResearchDialog;
         }
 
         public static void Postfix(ResearchProjectDef proj)
