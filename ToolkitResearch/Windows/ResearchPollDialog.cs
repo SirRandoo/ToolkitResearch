@@ -163,7 +163,7 @@ namespace SirRandoo.ToolkitResearch.Windows
 
                 SettingsHelper.DrawLabel(
                     line,
-                    $"[{choice.IdLabel}] {choice.Project!.LabelCap}: {choice.VoteCountLabel}"
+                    $"<b>#{choice.IdLabel}</b>  {choice.Project!.LabelCap}: {choice.VoteCountLabel}"
                 );
             }
 
