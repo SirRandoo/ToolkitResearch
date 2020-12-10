@@ -180,7 +180,7 @@ namespace SirRandoo.ToolkitResearch.Windows
             SettingsHelper.DrawLabel(
                 projectRect,
                 choice.Project!.LabelCap,
-                fontScale: projectRect.width >= voterRect.x ? GameFont.Tiny : GameFont.Small
+                fontScale: projectRect.x + projectRect.width >= voterRect.x ? GameFont.Tiny : GameFont.Small
             );
             SettingsHelper.DrawLabel(voterRect, choice.VoteCountLabel);
             TooltipHandler.TipRegion(line, choice.Project.description);
