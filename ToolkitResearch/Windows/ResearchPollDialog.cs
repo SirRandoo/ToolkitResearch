@@ -70,7 +70,7 @@ namespace SirRandoo.ToolkitResearch.Windows
         }
 
         public override Vector2 InitialSize =>
-            new Vector2(325, 150 + Text.SmallFontHeight * Mathf.Min(Settings.MaximumOptions + 1, 8));
+            new Vector2(290, 150 + Text.SmallFontHeight * Mathf.Min(Settings.MaximumOptions + 1, 8));
 
         private void GetTranslations(Def project = null)
         {
