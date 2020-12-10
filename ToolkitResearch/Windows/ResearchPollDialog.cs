@@ -249,7 +249,7 @@ namespace SirRandoo.ToolkitResearch.Windows
 
         private static IEnumerable<ResearchProjectDef> GetProjects()
         {
-            IEnumerable<ResearchProjectDef> projects = DefDatabase<ResearchProjectDef>.AllDefs;
+            IEnumerable<ResearchProjectDef> projects = DefDatabase<ResearchProjectDef>.AllDefs.InRandomOrder();
 
             foreach (ResearchProjectDef project in projects)
             {
