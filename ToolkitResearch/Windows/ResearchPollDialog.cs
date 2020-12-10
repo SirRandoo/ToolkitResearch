@@ -219,7 +219,7 @@ namespace SirRandoo.ToolkitResearch.Windows
         {
             base.WindowUpdate();
 
-            if (_projectIndexer != null) // TODO: This will block the timer from updating while it's in effect.
+            if (_projectIndexer != null)
             {
                 try
                 {
