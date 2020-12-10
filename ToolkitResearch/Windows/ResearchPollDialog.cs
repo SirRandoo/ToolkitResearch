@@ -163,6 +163,7 @@ namespace SirRandoo.ToolkitResearch.Windows
                     line,
                     $"<b>#{choice.IdLabel}</b>  {choice.Project!.LabelCap}: {choice.VoteCountLabel}"
                 );
+                TooltipHandler.TipRegion(line, choice.Project.description);
             }
 
             listing.End();
