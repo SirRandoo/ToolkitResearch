@@ -78,9 +78,9 @@ namespace SirRandoo.ToolkitResearch.Windows
             _resultsTitleText = "ToolkitResearch.Windows.Poll.ResultsTitle".TranslateSimple();
             _completeTitleText = "ToolkitResearch.Windows.Poll.CompleteTitle".TranslateSimple();
             _loadingText = "ToolkitResearch.Windows.Poll.LoadingNextOptions".TranslateSimple();
-            
-            _completeText = project != null ? 
-                (string) "ToolkitResearch.Windows.Poll.ResearchComplete".Translate(project.label)
+
+            _completeText = project != null
+                ? (string) "ToolkitResearch.Windows.Poll.ResearchComplete".Translate(project.label)
                 : "";
         }
 
@@ -178,7 +178,7 @@ namespace SirRandoo.ToolkitResearch.Windows
             GUI.BeginGroup(_timerRect);
             var progress = 0f;
 
-            if(_timer > 0)
+            if (_timer > 0)
             {
                 switch (_state)
                 {
@@ -260,7 +260,7 @@ namespace SirRandoo.ToolkitResearch.Windows
                         // ReSharper disable once TailRecursiveCall
                         UpdateState();
                     }
-                    
+
                     return;
                 case WindowState.Research:
                     optionalTitle = _pollTitleText.ColorTagged(ColorLibrary.LightGreen).Tagged("b");
