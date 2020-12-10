@@ -147,17 +147,18 @@ namespace SirRandoo.ToolkitResearch.Windows
                 PollItem choice = _choices[index];
                 Rect line = listing.GetRect(Text.LineHeight);
 
-                if(choice.VoteCount > 0)
+                float chance = choice.VoteCount > 0 ? choice.VoteCount / _totalVotes : 0f;
+                bool winner = drawWinner && choice.Project == Find.ResearchManager?.currentProj;
+                Rect progressRect = new Rect(line.x, line.y, line.width * (winner ? 1f : chance), line.height * 0.95f)
+                   .Rounded();
+
+                if (winner)
                 {
-                    float chance = choice.VoteCount / _totalVotes;
-
-                    if (drawWinner && choice.Project == Find.ResearchManager?.currentProj)
-                    {
-                        GUI.color = ColorLibrary.PaleGreen;
-                    }
-
-                    Widgets.DrawLightHighlight(new Rect(line.x, line.y, line.width * chance, line.height * 0.95f).Rounded());
-                    GUI.color = Color.white;
+                    Widgets.DrawHighlightSelected(progressRect);
+                }
+                else
+                {
+                    Widgets.DrawLightHighlight(progressRect);
                 }
 
                 SettingsHelper.DrawLabel(line, $"[{index + 1}] {choice.Project!.LabelCap}: {choice.VoteCountLabel}");
