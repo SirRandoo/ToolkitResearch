@@ -16,13 +16,12 @@ namespace SirRandoo.ToolkitResearch.Windows
     {
         private static readonly Gradient TimerGradient;
         private readonly List<PollItem> _choices = new List<PollItem>();
-        private Rect _completedRect;
+        private Rect _contentRect;
         private string _completeText;
         private string _completeTitleText;
         private string _loadingText;
         private int _marker;
         private bool _notified;
-        private Rect _pollRect;
         private string _pollTitleText;
         private IEnumerator<ResearchProjectDef> _projectIndexer;
         private string _resultsTitleText;
@@ -140,8 +139,8 @@ namespace SirRandoo.ToolkitResearch.Windows
         private void DrawResearchPoll(bool drawWinner = false)
         {
             var listing = new Listing_Standard();
-            listing.Begin(_pollRect);
-            listing.BeginScrollView(_pollRect, ref _scrollPos, ref _viewPort);
+            listing.Begin(_contentRect);
+            listing.BeginScrollView(_contentRect, ref _scrollPos, ref _viewPort);
             for (var index = 0; index < _choices.Count; index++)
             {
                 PollItem choice = _choices[index];
@@ -206,8 +205,8 @@ namespace SirRandoo.ToolkitResearch.Windows
 
         private void DrawCompletedResearch()
         {
-            GUI.BeginGroup(_completedRect);
-            SettingsHelper.DrawLabel(_completedRect, _completeText, TextAnchor.UpperLeft);
+            GUI.BeginGroup(_contentRect);
+            SettingsHelper.DrawLabel(_contentRect, _completeText, TextAnchor.UpperLeft);
             GUI.EndGroup();
         }
 
@@ -289,9 +288,8 @@ namespace SirRandoo.ToolkitResearch.Windows
 
         private void CalculateRegions(Rect canvas)
         {
-            _completedRect = new Rect(0f, 0f, canvas.width, canvas.height - Text.SmallFontHeight);
-            _pollRect = _completedRect;
-            _viewPort = new Rect(0f, 0f, _completedRect.width - 16f, _choices.Count * Text.SmallFontHeight);
+            _contentRect = new Rect(0f, 0f, canvas.width, canvas.height - Text.SmallFontHeight);
+            _viewPort = new Rect(0f, 0f, _contentRect.width - 16f, _choices.Count * Text.SmallFontHeight);
             _timerRect = new Rect(0f, canvas.height - Text.SmallFontHeight, canvas.width, Text.SmallFontHeight);
         }
 
