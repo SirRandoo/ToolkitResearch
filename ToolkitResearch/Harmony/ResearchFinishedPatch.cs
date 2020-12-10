@@ -25,9 +25,9 @@ namespace SirRandoo.ToolkitResearch.Harmony
             doCompletionDialog = false;
         }
 
-        public static void Postfix()
+        public static void Postfix(ResearchProjectDef proj)
         {
-            ToolkitResearch.StartNewPoll();
+            ToolkitResearch.StartNewPoll(proj);
         }
     }
 }

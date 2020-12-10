@@ -11,7 +11,12 @@ namespace SirRandoo.ToolkitResearch
         private static string _maximumOptionsBuffer = MaximumOptions.ToString();
         public static int Duration = 280;
         private static string _durationBuffer = Duration.ToString();
-        private static bool OptionsInChat;
+        public static bool OptionsInChat;
+        public static bool ShowResearchDialog;
+        public static int CompletedDuration = 10;
+        public static int ResultsDuration = 10;
+        private static string _completedDurationBuffer;
+        private static string _resultsDurationBuffer;
 
         public static void Draw(Rect canvas)
         {
@@ -28,10 +33,32 @@ namespace SirRandoo.ToolkitResearch
             SettingsHelper.DrawLabel(durationLabel, "ToolkitResearch.Settings.Duration.Label".TranslateSimple());
             Widgets.TextFieldNumeric(durationField, ref Duration, ref _durationBuffer, 60);
             listing.DrawDescription("ToolkitResearch.Settings.Duration.Description".TranslateSimple());
-            
-            listing.CheckboxLabeled("ToolkitResearch.Settings.OptionsInChat.Label".TranslateSimple(), ref OptionsInChat);
+
+            (Rect completedLabel, Rect completedField) = listing.GetRectAsForm();
+            SettingsHelper.DrawLabel(
+                completedLabel,
+                "ToolkitResearch.Settings.CompletedDuration.Label".TranslateSimple()
+            );
+            Widgets.TextFieldNumeric(completedField, ref CompletedDuration, ref _completedDurationBuffer);
+            listing.DrawDescription("ToolkitResearch.Settings.CompletedDuration.Description".TranslateSimple());
+
+            (Rect resultsLabel, Rect resultsField) = listing.GetRectAsForm();
+            SettingsHelper.DrawLabel(resultsLabel, "ToolkitResearch.Settings.ResultsDuration.Label".TranslateSimple());
+            Widgets.TextFieldNumeric(resultsField, ref ResultsDuration, ref _resultsDurationBuffer);
+            listing.DrawDescription("ToolkitResearch.Settings.ResultsDuration.Description".TranslateSimple());
+
+            listing.CheckboxLabeled(
+                "ToolkitResearch.Settings.OptionsInChat.Label".TranslateSimple(),
+                ref OptionsInChat
+            );
             listing.DrawDescription("ToolkitResearch.Settings.OptionsInChat.Description".TranslateSimple());
-            
+
+            listing.CheckboxLabeled(
+                "ToolkitResearch.Settings.ShowResearchDialog.Label".TranslateSimple(),
+                ref ShowResearchDialog
+            );
+            listing.DrawDescription("ToolkitResearch.Settings.ShowResearchDialog.Description".TranslateSimple());
+
             listing.End();
         }
 
@@ -39,6 +66,10 @@ namespace SirRandoo.ToolkitResearch
         {
             Scribe_Values.Look(ref MaximumOptions, "polls.maxOptions", 4);
             Scribe_Values.Look(ref Duration, "polls.duration", 280);
+            Scribe_Values.Look(ref ResultsDuration, "polls.resultsDuration", 10);
+            Scribe_Values.Look(ref CompletedDuration, "polls.completedDuration", 10);
+            Scribe_Values.Look(ref OptionsInChat, "polls.sendToChat");
+            Scribe_Values.Look(ref ShowResearchDialog, "behavior.researchDialog");
         }
     }
 }

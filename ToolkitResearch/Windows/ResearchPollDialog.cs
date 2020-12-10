@@ -9,18 +9,30 @@ using Verse;
 
 namespace SirRandoo.ToolkitResearch.Windows
 {
+    internal enum WindowState { Layout, Research, Poll, Results }
+
     [StaticConstructorOnStartup]
     public class ResearchPollDialog : Window
     {
         private static readonly Gradient TimerGradient;
         private readonly List<PollItem> _choices = new List<PollItem>();
-        private string _loading;
+        private Rect _completedRect;
+        private string _completeText;
+        private string _completeTitleText;
+        private string _loadingText;
         private int _marker;
         private bool _notified;
+        private Rect _pollRect;
+        private string _pollTitleText;
         private IEnumerator<ResearchProjectDef> _projectIndexer;
+        private string _resultsTitleText;
         private Vector2 _scrollPos;
-        private float _timer = Settings.Duration;
-        private string _title;
+        private WindowState _state = WindowState.Layout;
+        private float _timer = 1;
+        private Rect _timerRect;
+        private float _totalVotes;
+        private Rect _viewPort;
+        private readonly bool _wasProjectCompleted;
 
         static ResearchPollDialog()
         {
@@ -41,11 +53,11 @@ namespace SirRandoo.ToolkitResearch.Windows
             TimerGradient.SetKeys(colorKey, alphaKey);
         }
 
-        public ResearchPollDialog()
+        public ResearchPollDialog(Def project = null)
         {
-            GetTranslations();
-
-            optionalTitle = _title;
+            GetTranslations(project);
+            _wasProjectCompleted = project != null;
+            optionalTitle = _loadingText;
 
             doCloseX = true;
             draggable = true;
@@ -60,60 +72,138 @@ namespace SirRandoo.ToolkitResearch.Windows
         public override Vector2 InitialSize =>
             new Vector2(325, 150 + Text.SmallFontHeight * Mathf.Min(Settings.MaximumOptions + 1, 8));
 
-        private void GetTranslations()
+        private void GetTranslations(Def project = null)
         {
-            _title = "ToolkitResearch.Windows.Poll.Title".TranslateSimple();
-            _loading = "ToolkitResearch.Windows.Poll.Loading".TranslateSimple();
+            _pollTitleText = "ToolkitResearch.Windows.Poll.PollTitle".TranslateSimple();
+            _resultsTitleText = "ToolkitResearch.Windows.Poll.ResultsTitle".TranslateSimple();
+            _completeTitleText = "ToolkitResearch.Windows.Poll.CompleteTitle".TranslateSimple();
+            _loadingText = "ToolkitResearch.Windows.Poll.LoadingNextOptions".TranslateSimple();
+            
+            _completeText = project != null ? 
+                (string) "ToolkitResearch.Windows.Poll.ResearchComplete".Translate(project.label)
+                : "";
         }
 
         public override void PreOpen()
         {
             base.PreOpen();
 
-            Current.Game.GetComponent<ResearchVoteHandler>()?.RegisterPoll(this);
+            var voteHandler = Current.Game.GetComponent<ResearchVoteHandler>();
+
+            if (voteHandler == null)
+            {
+                Log.Error("[ToolkitResearch] Could not get vote handler!".ColorTagged(ColorLibrary.Salmon));
+                Close();
+                return;
+            }
+
+            voteHandler.RegisterPoll(this);
             _projectIndexer = GetProjects().GetEnumerator();
         }
 
-        public override void DoWindowContents(Rect inRect)
+        public override void DoWindowContents(Rect canvas)
         {
-            GUI.BeginGroup(inRect);
-
-            var listing = new Listing_Standard();
-            var contentRect = new Rect(0f, 0f, inRect.width, inRect.height - Text.SmallFontHeight);
-            var viewPort = new Rect(0f, 0f, inRect.width - 16f, _choices.Count * Text.SmallFontHeight);
-
-            listing.Begin(inRect);
-            listing.BeginScrollView(contentRect, ref _scrollPos, ref viewPort);
-
-            if (_projectIndexer == null)
+            if (Event.current.type == EventType.Layout)
             {
-                for (var index = 0; index < _choices.Count; index++)
+                if (_state == WindowState.Layout)
                 {
-                    PollItem choice = _choices[index];
-                    Rect line = listing.GetRect(Text.LineHeight);
+                    CalculateRegions(canvas);
+                }
 
-                    if (index % 2 == 1)
+                return;
+            }
+
+            GUI.BeginGroup(canvas);
+
+            switch (_state)
+            {
+                case WindowState.Layout: // Indexing poll options OR timer is stuck
+                    SettingsHelper.DrawLabel(canvas, _loadingText);
+                    break;
+                case WindowState.Research:
+                    DrawCompletedResearch();
+                    DrawTimer();
+                    break;
+                case WindowState.Poll:
+                    DrawResearchPoll();
+                    DrawTimer();
+                    break;
+                case WindowState.Results:
+                    DrawResearchPoll(true);
+                    DrawTimer();
+                    break;
+            }
+
+            GUI.EndGroup();
+        }
+
+        private void DrawResearchPoll(bool drawWinner = false)
+        {
+            var listing = new Listing_Standard();
+            listing.Begin(_pollRect);
+            listing.BeginScrollView(_pollRect, ref _scrollPos, ref _viewPort);
+            for (var index = 0; index < _choices.Count; index++)
+            {
+                PollItem choice = _choices[index];
+                Rect line = listing.GetRect(Text.LineHeight);
+
+                if(choice.VoteCount > 0)
+                {
+                    float chance = choice.VoteCount / _totalVotes;
+
+                    if (drawWinner && choice.Project == Find.ResearchManager?.currentProj)
                     {
-                        Widgets.DrawLightHighlight(line);
+                        GUI.color = ColorLibrary.PaleGreen;
                     }
 
-                    SettingsHelper.DrawLabel(line, $"[{index + 1}] {choice.Project.LabelCap}: {choice.Voters.Count:N0}");
+                    Widgets.DrawLightHighlight(new Rect(line.x, line.y, line.width * chance, line.height * 0.95f).Rounded());
+                    GUI.color = Color.white;
                 }
-            }
-            else
-            {
-                SettingsHelper.DrawLabel(contentRect, _loading, TextAnchor.MiddleCenter);
+
+                SettingsHelper.DrawLabel(line, $"[{index + 1}] {choice.Project!.LabelCap}: {choice.VoteCount}");
             }
 
             listing.End();
-            listing.EndScrollView(ref viewPort);
-            var footerRect = new Rect(0f, inRect.height - Text.LineHeight, inRect.width, Text.LineHeight);
+            listing.EndScrollView(ref _viewPort);
+        }
 
-            float progress = _timer / Settings.Duration;
+        private void DrawTimer()
+        {
+            if (_timer <= 0)
+            {
+                return;
+            }
+
+            GUI.BeginGroup(_timerRect);
+            var progress = 0f;
+
+            if(_timer > 0)
+            {
+                switch (_state)
+                {
+                    case WindowState.Research:
+                        progress = _timer / Settings.CompletedDuration;
+                        break;
+                    case WindowState.Poll:
+                        progress = _timer / Settings.Duration;
+                        break;
+                    case WindowState.Results:
+                        progress = _timer / Settings.ResultsDuration;
+                        break;
+                }
+            }
+
             GUI.color = TimerGradient.Evaluate(1f - progress);
-            Widgets.FillableBar(footerRect, progress, Texture2D.whiteTexture, null, true);
+            Widgets.FillableBar(_timerRect.AtZero(), progress, Texture2D.whiteTexture, null, true);
             GUI.color = Color.white;
 
+            GUI.EndGroup();
+        }
+
+        private void DrawCompletedResearch()
+        {
+            GUI.BeginGroup(_completedRect);
+            SettingsHelper.DrawLabel(_completedRect, _completeText, TextAnchor.UpperLeft);
             GUI.EndGroup();
         }
 
@@ -121,7 +211,7 @@ namespace SirRandoo.ToolkitResearch.Windows
         {
             base.WindowUpdate();
 
-            if (_projectIndexer != null)
+            if (_projectIndexer != null) // TODO: This will block the timer from updating while it's in effect.
             {
                 try
                 {
@@ -132,7 +222,11 @@ namespace SirRandoo.ToolkitResearch.Windows
                     _projectIndexer = null;
                 }
 
-                Notify_ChoicesComplete();
+                if (_projectIndexer == null)
+                {
+                    Notify_AllChoicesGathered();
+                }
+
                 return;
             }
 
@@ -147,18 +241,59 @@ namespace SirRandoo.ToolkitResearch.Windows
 
             if (_timer <= 0)
             {
-                Close();
+                UpdateState();
             }
         }
 
-        private void Notify_ChoicesComplete()
+        private void UpdateState()
         {
-            if (_notified || TwitchWrapper.Client == null)
+            switch (_state)
+            {
+                case WindowState.Layout:
+                    optionalTitle = _completeTitleText;
+                    _state = WindowState.Research;
+                    _timer = Settings.CompletedDuration;
+
+                    if (!_wasProjectCompleted)
+                    {
+                        // ReSharper disable once TailRecursiveCall
+                        UpdateState();
+                    }
+                    
+                    return;
+                case WindowState.Research:
+                    optionalTitle = _pollTitleText;
+                    _state = WindowState.Poll;
+                    _timer = Settings.Duration;
+                    return;
+                case WindowState.Poll:
+                    ChooseWinner();
+                    optionalTitle = _resultsTitleText;
+                    _state = WindowState.Results;
+                    _timer = Settings.ResultsDuration;
+                    return;
+                case WindowState.Results:
+                    Close();
+                    return;
+            }
+        }
+
+        private void CalculateRegions(Rect canvas)
+        {
+            _completedRect = new Rect(0f, 0f, canvas.width, canvas.height - Text.SmallFontHeight);
+            _pollRect = _completedRect;
+            _viewPort = new Rect(0f, 0f, _completedRect.width - 16f, _choices.Count * Text.SmallFontHeight);
+            _timerRect = new Rect(0f, canvas.height - Text.SmallFontHeight, canvas.width, Text.SmallFontHeight);
+        }
+
+        private void Notify_AllChoicesGathered()
+        {
+            if (!Settings.OptionsInChat || _notified || TwitchWrapper.Client == null)
             {
                 return;
             }
 
-            TwitchWrapper.SendChatMessage(_title);
+            TwitchWrapper.SendChatMessage(_pollTitleText);
 
             for (var index = 0; index < _choices.Count; index++)
             {
@@ -200,17 +335,19 @@ namespace SirRandoo.ToolkitResearch.Windows
 
         public override void PreClose()
         {
-            if (_choices.NullOrEmpty())
+            if (!_choices.NullOrEmpty() && Find.ResearchManager?.currentProj == null)
             {
-                base.PreClose();
-                return;
+                ChooseWinner();
             }
-            
+
+            base.PreClose();
+        }
+
+        private void ChooseWinner()
+        {
             int winningVotes = _choices.Max(i => i.Voters.Count);
             PollItem winner = _choices.Where(i => i.Voters.Count == winningVotes).RandomElement();
             Find.ResearchManager.currentProj = winner?.Project;
-
-            base.PreClose();
         }
 
         protected override void SetInitialSizeAndPosition()
@@ -228,13 +365,14 @@ namespace SirRandoo.ToolkitResearch.Windows
             try
             {
                 PollItem item = _choices[vote - 1];
-                
+
                 foreach (PollItem poll in _choices)
                 {
                     poll.Voters.Remove(username);
                 }
-                
+
                 item.Voters.Add(username);
+                Notify_ChoicesDirty();
             }
             catch (Exception)
             {
@@ -242,9 +380,14 @@ namespace SirRandoo.ToolkitResearch.Windows
             }
         }
 
+        private void Notify_ChoicesDirty()
+        {
+            _totalVotes = _choices.Sum(c => c.VoteCount);
+        }
+
         public bool IsProcessingVotes()
         {
-            return _projectIndexer == null;
+            return _projectIndexer == null && _timer > 0;
         }
 
         private static IEnumerable<ResearchProjectDef> GetProjects()

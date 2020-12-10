@@ -1,11 +1,18 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Verse;
 
 namespace SirRandoo.ToolkitResearch.Models
 {
     public class PollItem
     {
+        public PollItem()
+        {
+            Voters.CollectionChanged += (sender, args) => VoteCount = Voters.Count;
+        }
+
         public ResearchProjectDef Project { get; set; }
-        public List<string> Voters { get; set; } = new List<string>();
+        public ObservableCollection<string> Voters { get; set; } = new ObservableCollection<string>();
+        public int VoteCount { get; set; }
     }
 }

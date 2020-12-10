@@ -25,9 +25,9 @@ namespace SirRandoo.ToolkitResearch
             Settings.Draw(inRect);
         }
         
-        internal static void StartNewPoll()
+        internal static void StartNewPoll(ResearchProjectDef project = null)
         {
-            Find.WindowStack?.Add(new ResearchPollDialog());
+            Find.WindowStack?.Add(new ResearchPollDialog(project));
         }
     }
 }
