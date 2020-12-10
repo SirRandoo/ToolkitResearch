@@ -69,7 +69,7 @@ namespace SirRandoo.ToolkitResearch.Windows
         }
 
         public override Vector2 InitialSize =>
-            new Vector2(290, 150 + Text.SmallFontHeight * Mathf.Min(Settings.MaximumOptions + 1, 8));
+            new Vector2(310, 150 + Text.SmallFontHeight * Mathf.Min(Settings.MaximumOptions + 1, 8));
 
         private void GetTranslations(Def project = null)
         {
@@ -371,10 +371,10 @@ namespace SirRandoo.ToolkitResearch.Windows
         {
             windowRect = new Rect(
                 UI.screenWidth - InitialSize.x,
-                UI.screenHeight / 2f - InitialSize.y / 2f,
+                UI.screenHeight / 5f - InitialSize.y / 5f,
                 InitialSize.x,
                 InitialSize.y
-            );
+            ).Rounded();
         }
 
         public void ProcessVote(string username, int vote)
