@@ -1,13 +1,15 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using Verse;
 
 namespace SirRandoo.ToolkitResearch.Models
 {
     public class PollItem
     {
-        public PollItem()
+        public PollItem(int id)
         {
+            Id = id;
+            IdLabel = id.ToString("N0");
+
             Voters.CollectionChanged += (sender, args) =>
             {
                 VoteCount = Voters.Count;
@@ -15,9 +17,11 @@ namespace SirRandoo.ToolkitResearch.Models
             };
         }
 
+        public int Id { get; }
+        public string IdLabel { get; }
         public ResearchProjectDef Project { get; set; }
-        public ObservableCollection<string> Voters { get; set; } = new ObservableCollection<string>();
-        public int VoteCount { get; set; }
-        public string VoteCountLabel { get; set; }
+        public ObservableCollection<string> Voters { get; } = new ObservableCollection<string>();
+        public int VoteCount { get; private set; }
+        public string VoteCountLabel { get; private set; }
     }
 }

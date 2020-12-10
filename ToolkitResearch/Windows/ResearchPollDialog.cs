@@ -161,7 +161,7 @@ namespace SirRandoo.ToolkitResearch.Windows
                     Widgets.DrawLightHighlight(progressRect);
                 }
 
-                SettingsHelper.DrawLabel(line, $"[{index + 1}] {choice.Project!.LabelCap}: {choice.VoteCountLabel}");
+                SettingsHelper.DrawLabel(line, $"[{choice.IdLabel}] {choice.Project!.LabelCap}: {choice.VoteCountLabel}");
             }
 
             listing.End();
@@ -329,7 +329,7 @@ namespace SirRandoo.ToolkitResearch.Windows
 
                 if (_choices.Count < Settings.MaximumOptions)
                 {
-                    _choices.Add(new PollItem {Project = project});
+                    _choices.Add(new PollItem(_choices.Count + 1) {Project = project});
                 }
                 else
                 {
@@ -368,22 +368,20 @@ namespace SirRandoo.ToolkitResearch.Windows
 
         public void ProcessVote(string username, int vote)
         {
-            try
-            {
-                PollItem item = _choices[vote - 1];
+            PollItem item = _choices.FirstOrDefault(c => c.Id == vote);
 
-                foreach (PollItem poll in _choices)
-                {
-                    poll.Voters.Remove(username);
-                }
-
-                item.Voters.Add(username);
-                Notify_ChoicesDirty();
-            }
-            catch (Exception)
+            if (item == null)
             {
-                // ignored
+                return;
             }
+
+            foreach (PollItem poll in _choices)
+            {
+                poll.Voters.Remove(username);
+            }
+
+            item.Voters.Add(username);
+            Notify_ChoicesDirty();
         }
 
         private void Notify_ChoicesDirty()
