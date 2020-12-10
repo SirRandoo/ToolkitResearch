@@ -145,6 +145,11 @@ namespace SirRandoo.ToolkitResearch.Windows
             {
                 Rect line = listing.GetRect(Text.LineHeight);
 
+                if (!line.IsRegionVisible(_viewPort, _scrollPos))
+                {
+                    continue;
+                }
+
                 float chance = choice.VoteCount > 0 ? choice.VoteCount / _totalVotes : 0f;
                 bool winner = drawWinner && choice.Project == Find.ResearchManager?.currentProj;
                 Rect progressRect = new Rect(line.x, line.y, line.width * (winner ? 1f : chance), line.height * 0.95f)
