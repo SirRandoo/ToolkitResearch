@@ -49,7 +49,7 @@ namespace SirRandoo.ToolkitResearch
 
             foreach (ResearchPollDialog dialog in _pollDialogs.Where(d => d.IsProcessingVotes()))
             {
-                dialog.ProcessVote(twitchMessage.Username.ToLowerInvariant(), vote);
+                dialog.RegisterVote(twitchMessage.Username.ToLowerInvariant(), vote);
             }
         }
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using SirRandoo.ToolkitResearch.Helpers;
@@ -32,6 +33,7 @@ namespace SirRandoo.ToolkitResearch.Windows
         private Rect _timerRect;
         private float _totalVotes;
         private Rect _viewPort;
+        private readonly ConcurrentQueue<Tuple<string, int>> _pendingVotes = new ConcurrentQueue<Tuple<string, int>>();
 
         static ResearchPollDialog()
         {
@@ -257,6 +259,11 @@ namespace SirRandoo.ToolkitResearch.Windows
                 return;
             }
 
+            if (!_pendingVotes.IsEmpty)
+            {
+                ProcessMessages();
+            }
+
             int currentTime = Mathf.FloorToInt(Time.unscaledTime);
             if (currentTime <= _marker)
             {
@@ -396,22 +403,35 @@ namespace SirRandoo.ToolkitResearch.Windows
             ).Rounded();
         }
 
-        public void ProcessVote(string username, int vote)
+        public void RegisterVote(string username, int vote)
         {
-            PollItem item = _choices.FirstOrDefault(c => c.Id == vote);
+            _pendingVotes.Enqueue(Tuple.Create(username, vote));
+        }
 
-            if (item == null)
+        private void ProcessMessages()
+        {
+            while (!_pendingVotes.IsEmpty)
             {
-                return;
-            }
+                if (!_pendingVotes.TryDequeue(out Tuple<string, int> pending))
+                {
+                    return;
+                }
+                
+                PollItem item = _choices.FirstOrDefault(c => c.Id == pending.Item2);
 
-            foreach (PollItem poll in _choices)
-            {
-                poll.Voters.Remove(username);
-            }
+                if (item == null)
+                {
+                    return;
+                }
 
-            item.Voters.Add(username);
-            Notify_ChoicesDirty();
+                foreach (PollItem poll in _choices)
+                {
+                    poll.Voters.Remove(pending.Item1);
+                }
+
+                item.Voters.Add(pending.Item1);
+                Notify_ChoicesDirty();
+            }
         }
 
         private void Notify_ChoicesDirty()
