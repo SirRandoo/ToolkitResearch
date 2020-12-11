@@ -161,9 +161,9 @@ namespace SirRandoo.ToolkitResearch.Windows
 
         private void DrawChoice(Rect line, PollItem choice, bool drawWinner)
         {
-            var idRect = new Rect(0f, line.y, choice.IdWidth, line.height);
-            var projectRect = new Rect(idRect.width + 5f, line.y, choice.ProjectWidth, line.height);
-            var voterRect = new Rect(line.width - choice.VoteCountWidth, line.y, choice.VoteCountWidth, line.height);
+            var idRect = new Rect(5f, line.y, choice.IdWidth, line.height);
+            var projectRect = new Rect(idRect.x + idRect.width + 5f, line.y, choice.ProjectWidth, line.height);
+            var voterRect = new Rect(line.width - choice.VoteCountWidth - 5f, line.y, choice.VoteCountWidth, line.height);
 
             float chance = choice.VoteCount > 0 ? choice.VoteCount / _totalVotes : 0f;
             float difference = Mathf.Abs(chance - choice.ChanceDisplay);
@@ -174,7 +174,7 @@ namespace SirRandoo.ToolkitResearch.Windows
             }
             
             bool winner = drawWinner && choice.Project == Find.ResearchManager?.currentProj;
-            Rect progressRect = new Rect(line.x, line.y, line.width * (winner ? 1f : choice.ChanceDisplay), line.height * 0.95f)
+            Rect progressRect = new Rect(line.x, line.y + line.height * 0.2f / 2f, line.width * (winner ? 1f : choice.ChanceDisplay), line.height * 0.8f)
                .Rounded();
 
             if (winner)
@@ -183,7 +183,7 @@ namespace SirRandoo.ToolkitResearch.Windows
             }
             else
             {
-                Widgets.DrawLightHighlight(progressRect);
+                Texture2D.whiteTexture.DrawColored(progressRect, ColorLibrary.DeepPurple);
             }
 
             SettingsHelper.DrawLabel(idRect, choice.IdLabel);
