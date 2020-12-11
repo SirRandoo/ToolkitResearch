@@ -164,8 +164,15 @@ namespace SirRandoo.ToolkitResearch.Windows
             var voterRect = new Rect(line.width - choice.VoteCountWidth, line.y, choice.VoteCountWidth, line.height);
 
             float chance = choice.VoteCount > 0 ? choice.VoteCount / _totalVotes : 0f;
+            float difference = Mathf.Abs(chance - choice.ChanceDisplay);
+
+            if (difference > 0.0f)
+            {
+                choice.ChanceDisplay = Mathf.SmoothStep(choice.ChanceDisplay, chance, 0.2f);
+            }
+            
             bool winner = drawWinner && choice.Project == Find.ResearchManager?.currentProj;
-            Rect progressRect = new Rect(line.x, line.y, line.width * (winner ? 1f : chance), line.height * 0.95f)
+            Rect progressRect = new Rect(line.x, line.y, line.width * (winner ? 1f : choice.ChanceDisplay), line.height * 0.95f)
                .Rounded();
 
             if (winner)

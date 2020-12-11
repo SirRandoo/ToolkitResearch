@@ -51,5 +51,7 @@ namespace SirRandoo.ToolkitResearch.Models
 
         public string VoteCountLabel { get; private set; }
         public float VoteCountWidth { get; private set; }
+        
+        public float ChanceDisplay { get; set; }
     }
 }
