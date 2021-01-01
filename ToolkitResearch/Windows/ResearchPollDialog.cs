@@ -296,6 +296,12 @@ namespace SirRandoo.ToolkitResearch.Windows
 
                     return;
                 case WindowState.Research:
+                    if (_choices.Count <= 1)
+                    {
+                        Close();
+                        return;
+                    }
+
                     SetTitle(_pollTitleText);
                     _state = WindowState.Poll;
                     _timer = Settings.Duration;
