@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using HarmonyLib;
@@ -25,7 +26,16 @@ namespace SirRandoo.ToolkitResearch.Harmony
 
         public static void Postfix(ResearchProjectDef proj)
         {
-            ToolkitResearch.StartNewPoll(proj);
+            try
+            {
+                ToolkitResearch.StartNewPoll(proj);
+            }
+            catch (Exception e)
+            {
+                Log.Error(
+                    $"[ToolkitResearch] You shouldn't be seeing this error.\n\nProject null? {proj == null}\nProject name: {proj?.label ?? "Unknown"}\nException type: {e.GetType().Name}\nException message: {e.Message}\nFull stacktrace is as follows:\n{e}"
+                );
+            }
         }
     }
 }
