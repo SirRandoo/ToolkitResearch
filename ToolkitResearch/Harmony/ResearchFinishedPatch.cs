@@ -24,6 +24,7 @@ namespace SirRandoo.ToolkitResearch.Harmony
             doCompletionDialog = Settings.ShowResearchDialog && Find.WindowStack != null;
         }
 
+        [HarmonyPriority(800)]
         public static void Postfix(ResearchProjectDef proj)
         {
             try
