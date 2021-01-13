@@ -49,9 +49,13 @@ namespace SirRandoo.ToolkitResearch.Harmony
         [SuppressMessage("ReSharper", "InconsistentNaming")]
         public static Exception Finalizer(Exception __exception, ResearchProjectDef proj)
         {
-            Log.Error(
-                $"[ToolkitResearch] You shouldn't be seeing this error.\n\nProject null? {proj == null}\nProject name: {proj?.label ?? "Unknown"}\nException type: {__exception?.GetType().Name ?? "None"}\nException message: {__exception?.Message ?? "None"}\nFull stacktrace is as follows:\n{__exception}"
-            );
+            if(__exception != null)
+            {
+                Log.Error(
+                    $"[ToolkitResearch] You shouldn't be seeing this error.\n\nProject null? {proj == null}\nProject name: {proj?.label ?? "Unknown"}\nException type: {__exception?.GetType().Name ?? "None"}\nException message: {__exception?.Message ?? "None"}\nFull stacktrace is as follows:\n{__exception}"
+                );
+            }
+
             return null;
         }
     }
