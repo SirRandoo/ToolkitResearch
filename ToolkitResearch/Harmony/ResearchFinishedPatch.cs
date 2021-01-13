@@ -15,7 +15,7 @@ namespace SirRandoo.ToolkitResearch.Harmony
     {
         public static IEnumerable<MethodBase> TargetMethods()
         {
-            yield return AccessTools.Method(typeof(ResearchManager), nameof(ResearchManager.FinishProject));
+            yield return AccessTools.Method(typeof(ResearchManager), "FinishProject");
         }
 
         [SuppressMessage("ReSharper", "RedundantAssignment")]
