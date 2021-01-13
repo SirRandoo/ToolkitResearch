@@ -38,5 +38,20 @@ namespace SirRandoo.ToolkitResearch.Harmony
                 );
             }
         }
+
+        public static Exception Cleanup(Exception exception)
+        {
+            Log.Message($"[ToolkitResearch] Failed to patch ResearchManager.FinishProject! Stacktrace: {exception}");
+            return null;
+        }
+
+        // TODO: Remove finalizer once this weird crashing is diagnosed.
+        public static Exception Finalizer(Exception exception, ResearchProjectDef proj)
+        {
+            Log.Error(
+                $"[ToolkitResearch] You shouldn't be seeing this error.\n\nProject null? {proj == null}\nProject name: {proj?.label ?? "Unknown"}\nException type: {exception?.GetType().Name ?? "None"}\nException message: {exception?.Message ?? "None"}\nFull stacktrace is as follows:\n{exception}"
+            );
+            return null;
+        }
     }
 }
