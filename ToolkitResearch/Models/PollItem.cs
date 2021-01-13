@@ -30,7 +30,11 @@ namespace SirRandoo.ToolkitResearch.Models
             set
             {
                 _project = value;
+
+                GameFont cache = Text.Font;
+                Text.Font = GameFont.Small;
                 ProjectWidth = Text.CalcSize(_project.LabelCap).x;
+                Text.Font = cache;
             }
         }
 
