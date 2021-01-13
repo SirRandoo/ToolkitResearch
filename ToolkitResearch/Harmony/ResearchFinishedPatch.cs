@@ -46,10 +46,11 @@ namespace SirRandoo.ToolkitResearch.Harmony
         }
 
         // TODO: Remove finalizer once this weird crashing is diagnosed.
-        public static Exception Finalizer(Exception exception, ResearchProjectDef proj)
+        [SuppressMessage("ReSharper", "InconsistentNaming")]
+        public static Exception Finalizer(Exception __exception, ResearchProjectDef proj)
         {
             Log.Error(
-                $"[ToolkitResearch] You shouldn't be seeing this error.\n\nProject null? {proj == null}\nProject name: {proj?.label ?? "Unknown"}\nException type: {exception?.GetType().Name ?? "None"}\nException message: {exception?.Message ?? "None"}\nFull stacktrace is as follows:\n{exception}"
+                $"[ToolkitResearch] You shouldn't be seeing this error.\n\nProject null? {proj == null}\nProject name: {proj?.label ?? "Unknown"}\nException type: {__exception?.GetType().Name ?? "None"}\nException message: {__exception?.Message ?? "None"}\nFull stacktrace is as follows:\n{__exception}"
             );
             return null;
         }
