@@ -39,9 +39,9 @@ namespace SirRandoo.ToolkitResearch.Harmony
             }
         }
 
-        public static Exception Cleanup(Exception exception)
+        public static Exception Cleanup(Exception ex)
         {
-            Log.Message($"[ToolkitResearch] Failed to patch ResearchManager.FinishProject! Stacktrace: {exception}");
+            Log.Message($"[ToolkitResearch] Failed to patch ResearchManager.FinishProject! Stacktrace: {ex}");
             return null;
         }
 
