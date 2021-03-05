@@ -7,3 +7,5 @@ riderModule.iml
 /1.2/Assemblies/
 /_PublisherPlus.xml
 /ToolkitResearch.sln.DotSettings.user
+/Compat/ToolkitPolls/*
+/Source/libs/ToolkitPolls.dll

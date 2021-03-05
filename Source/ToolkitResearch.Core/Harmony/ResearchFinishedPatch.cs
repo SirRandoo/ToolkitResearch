@@ -13,6 +13,14 @@ namespace SirRandoo.ToolkitResearch.Harmony
     [UsedImplicitly(ImplicitUseTargetFlags.WithMembers)]
     public static class ResearchFinishedPatch
     {
+        private static bool _tkPollsActive;
+        
+        public static bool Prepare()
+        {
+            _tkPollsActive = ModLister.GetActiveModWithIdentifier("sirrandoo.tkcore.polls") != null;
+            return true;
+        }
+        
         public static IEnumerable<MethodBase> TargetMethods()
         {
             yield return AccessTools.Method(typeof(ResearchManager), "FinishProject");
@@ -21,7 +29,7 @@ namespace SirRandoo.ToolkitResearch.Harmony
         [SuppressMessage("ReSharper", "RedundantAssignment")]
         public static void Prefix(ref bool doCompletionDialog)
         {
-            doCompletionDialog = Settings.ShowResearchDialog && Find.WindowStack != null;
+            doCompletionDialog = Settings.ShowResearchDialog && Find.WindowStack != null && !_tkPollsActive;
         }
 
         [HarmonyPriority(800)]
@@ -42,20 +50,6 @@ namespace SirRandoo.ToolkitResearch.Harmony
         public static Exception Cleanup(Exception ex)
         {
             Log.Message($"[ToolkitResearch] Failed to patch ResearchManager.FinishProject! Stacktrace: {ex}");
-            return null;
-        }
-
-        // TODO: Remove finalizer once this weird crashing is diagnosed.
-        [SuppressMessage("ReSharper", "InconsistentNaming")]
-        public static Exception Finalizer(Exception __exception, ResearchProjectDef proj)
-        {
-            if(__exception != null)
-            {
-                Log.Error(
-                    $"[ToolkitResearch] You shouldn't be seeing this error.\n\nProject null? {proj == null}\nProject name: {proj?.label ?? "Unknown"}\nException type: {__exception?.GetType().Name ?? "None"}\nException message: {__exception?.Message ?? "None"}\nFull stacktrace is as follows:\n{__exception}"
-                );
-            }
-
             return null;
         }
     }

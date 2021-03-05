@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+    <PropertyGroup>
+        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+        <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+        <ProjectGuid>{92F96576-53B0-4A41-A7A6-F86477AF8FF2}</ProjectGuid>
+        <OutputType>Library</OutputType>
+        <AppDesignerFolder>Properties</AppDesignerFolder>
+        <RootNamespace>SirRandoo.ToolkitResearch.Compat</RootNamespace>
+        <AssemblyName>ToolkitResearch.ToolkitPolls</AssemblyName>
+        <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+        <FileAlignment>512</FileAlignment>
+        <LangVersion>8</LangVersion>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <DebugSymbols>true</DebugSymbols>
+        <DebugType>full</DebugType>
+        <Optimize>false</Optimize>
+        <OutputPath>..\..\Compat\ToolkitPolls\1.2</OutputPath>
+        <DefineConstants>DEBUG;TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <DebugType>pdbonly</DebugType>
+        <Optimize>true</Optimize>
+        <OutputPath>..\..\Compat\ToolkitPolls\1.2</OutputPath>
+        <DefineConstants>TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <ItemGroup>
+        <Reference Include="System" />
+        <Reference Include="System.Core" />
+        <Reference Include="System.Data" />
+        <Reference Include="System.Xml" />
+        <Reference Include="ToolkitPolls, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <HintPath>..\libs\ToolkitPolls.dll</HintPath>
+          <Private>False</Private>
+        </Reference>
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Patcher.cs" />
+        <Compile Include="Properties\AssemblyInfo.cs" />
+        <Compile Include="TkPolls.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Krafs.Rimworld.Ref" Version="1.2.2900" ExcludeAssets="runtime" />
+        <PackageReference Include="Lib.Harmony" Version="2.0.4" ExcludeAssets="runtime" />
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\ToolkitResearch.Core\ToolkitResearch.csproj" ExcludeAssets="all" Private="false">
+        <Project>{27ed4903-0149-4b6a-982f-0368e37e688b}</Project>
+        <Name>ToolkitResearch</Name>
+      </ProjectReference>
+    </ItemGroup>
+    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

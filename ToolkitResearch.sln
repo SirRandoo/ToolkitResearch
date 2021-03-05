@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToolkitResearch", "ToolkitResearch\ToolkitResearch.csproj", "{27ED4903-0149-4B6A-982F-0368E37E688B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToolkitResearch", "Source\ToolkitResearch.Core\ToolkitResearch.csproj", "{27ED4903-0149-4B6A-982F-0368E37E688B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToolkitResearch.ToolkitPolls", "Source\ToolkitResearch.ToolkitPolls\ToolkitResearch.ToolkitPolls.csproj", "{92F96576-53B0-4A41-A7A6-F86477AF8FF2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -12,5 +14,9 @@ Global
 		{27ED4903-0149-4B6A-982F-0368E37E688B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27ED4903-0149-4B6A-982F-0368E37E688B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{27ED4903-0149-4B6A-982F-0368E37E688B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92F96576-53B0-4A41-A7A6-F86477AF8FF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92F96576-53B0-4A41-A7A6-F86477AF8FF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92F96576-53B0-4A41-A7A6-F86477AF8FF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92F96576-53B0-4A41-A7A6-F86477AF8FF2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
