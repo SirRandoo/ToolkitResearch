@@ -23,7 +23,7 @@ namespace SirRandoo.ToolkitResearch
             Settings.Draw(inRect);
         }
 
-        internal static void StartNewPoll(ResearchProjectDef project = null)
+        internal static void StartNewPoll([CanBeNull] ResearchProjectDef project)
         {
             Find.WindowStack?.Add(new ResearchPollDialog(project));
         }

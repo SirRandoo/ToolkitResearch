@@ -24,7 +24,7 @@ namespace SirRandoo.ToolkitResearch
 
             if (Find.ResearchManager.currentProj == null)
             {
-                ToolkitResearch.StartNewPoll();
+                ToolkitResearch.StartNewPoll(null);
             }
         }
 
