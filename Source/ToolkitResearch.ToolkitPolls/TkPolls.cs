@@ -41,7 +41,7 @@ namespace SirRandoo.ToolkitResearch.Compat
             yield return _startNewPollMethod ??= AccessTools.Method(typeof(ToolkitResearch), "StartNewPoll");
         }
 
-        public static bool Prefix(ResearchProjectDef projectDef)
+        public static bool Prefix([CanBeNull] ResearchProjectDef project)
         {
             if (!UnityData.IsInMainThread)
             {
