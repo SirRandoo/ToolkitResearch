@@ -14,13 +14,13 @@ namespace SirRandoo.ToolkitResearch.Harmony
     public static class ResearchFinishedPatch
     {
         private static bool _tkPollsActive;
-        
+
         public static bool Prepare()
         {
             _tkPollsActive = ModLister.GetActiveModWithIdentifier("sirrandoo.tkcore.polls") != null;
             return true;
         }
-        
+
         public static IEnumerable<MethodBase> TargetMethods()
         {
             yield return AccessTools.Method(typeof(ResearchManager), "FinishProject");
