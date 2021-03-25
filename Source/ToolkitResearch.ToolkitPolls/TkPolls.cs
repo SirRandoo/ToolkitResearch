@@ -35,7 +35,7 @@ namespace SirRandoo.ToolkitResearch.Compat
     public static class TkPolls
     {
         private static MethodBase _startNewPollMethod;
-        
+
         public static IEnumerable<MethodBase> TargetMethods()
         {
             yield return _startNewPollMethod ??= AccessTools.Method(typeof(ToolkitResearch), "StartNewPoll");
@@ -43,6 +43,12 @@ namespace SirRandoo.ToolkitResearch.Compat
 
         public static bool Prefix(ResearchProjectDef projectDef)
         {
+            if (!UnityData.IsInMainThread)
+            {
+                LogHelper.Warn("Research project finished in another thread!");
+                return true;
+            }
+
             var builder = new PollBuilder();
             foreach (ResearchProjectDef proj in DefDatabase<ResearchProjectDef>.AllDefs.Where(p => p.CanStartNow)
                .InRandomOrder()
