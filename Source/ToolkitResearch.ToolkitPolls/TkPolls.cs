@@ -46,7 +46,7 @@ namespace SirRandoo.ToolkitResearch.Compat
         {
             if (!UnityData.IsInMainThread)
             {
-                LogHelper.Warn("Research project finished in another thread!");
+                Log.Message("[ToolkitResearch] Research project finished in another thread!");
                 return true;
             }
 
