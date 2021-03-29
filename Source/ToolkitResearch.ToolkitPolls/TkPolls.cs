@@ -61,6 +61,20 @@ namespace SirRandoo.ToolkitResearch.Compat
                 );
             }
 
+            if (project != null)
+            {
+                builder.WithCoverDrawer(
+                    r =>
+                    {
+                        ResearchProjectDef proj = project;
+                        SettingsHelper.DrawLabel(
+                            r,
+                            "ToolkitResearch.Windows.Poll.ResearchComplete".Translate(proj.label)
+                        );
+                    }
+                );
+            }
+
             builder.WithTitle("ToolkitResearch.Windows.Poll.PollTitle".TranslateSimple(), ColorLibrary.LightBlue);
             ToolkitPolls.ToolkitPolls.SchedulePoll(builder.Build());
 
