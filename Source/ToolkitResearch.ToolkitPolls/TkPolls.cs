@@ -26,7 +26,7 @@ using System.Reflection;
 using HarmonyLib;
 using JetBrains.Annotations;
 using SirRandoo.ToolkitPolls;
-using SirRandoo.ToolkitPolls.Helpers;
+using SirRandoo.ToolkitResearch.Helpers;
 using Verse;
 
 namespace SirRandoo.ToolkitResearch.Compat
