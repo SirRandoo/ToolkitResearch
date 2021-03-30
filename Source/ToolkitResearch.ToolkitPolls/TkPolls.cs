@@ -58,7 +58,8 @@ namespace SirRandoo.ToolkitResearch.Compat
             {
                 builder.WithChoice(
                     proj.label?.CapitalizeFirst() ?? proj.defName,
-                    () => Current.Game.researchManager.currentProj = proj
+                    () => Current.Game.researchManager.currentProj = proj,
+                    proj.description
                 );
             }
 
