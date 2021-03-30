@@ -27,6 +27,7 @@ using HarmonyLib;
 using JetBrains.Annotations;
 using SirRandoo.ToolkitPolls;
 using SirRandoo.ToolkitResearch.Helpers;
+using UnityEngine;
 using Verse;
 
 namespace SirRandoo.ToolkitResearch.Compat
@@ -69,7 +70,8 @@ namespace SirRandoo.ToolkitResearch.Compat
                         ResearchProjectDef proj = project;
                         SettingsHelper.DrawLabel(
                             r,
-                            "ToolkitResearch.Windows.Poll.ResearchComplete".Translate(proj.label)
+                            "ToolkitResearch.Windows.Poll.ResearchComplete".Translate(proj.label),
+                            TextAnchor.UpperLeft
                         );
                     }
                 );
