@@ -38,7 +38,7 @@
         <Reference Include="System.Data" />
         <Reference Include="System.Xml" />
         <Reference Include="ToolkitPolls, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
-          <HintPath>..\libs\ToolkitPolls.dll</HintPath>
+          <HintPath>..\..\..\ToolkitPolls\1.2\Assemblies\ToolkitPolls.dll</HintPath>
           <Private>False</Private>
         </Reference>
     </ItemGroup>
