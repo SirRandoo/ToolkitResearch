@@ -45,13 +45,8 @@ namespace SirRandoo.ToolkitResearch.Compat
 
         public static bool Prefix([CanBeNull] ResearchProjectDef project)
         {
-            if (!UnityData.IsInMainThread)
-            {
-                Log.Message("[ToolkitResearch] Research project finished in another thread!");
-                return true;
-            }
-
-            var builder = new PollBuilder();
+            var builder = new PollSetupBuilder();
+            
             foreach (ResearchProjectDef proj in DefDatabase<ResearchProjectDef>.AllDefs.Where(p => p.CanStartNow)
                .InRandomOrder()
                .Take(PollSettings.MaxChoices))
@@ -65,7 +60,7 @@ namespace SirRandoo.ToolkitResearch.Compat
 
             if (project != null)
             {
-                builder.WithCoverDrawer(
+                builder.WithCoverDelegate(
                     r =>
                     {
                         ResearchProjectDef proj = project;
@@ -78,8 +73,8 @@ namespace SirRandoo.ToolkitResearch.Compat
                 );
             }
 
-            builder.WithTitle("ToolkitResearch.Windows.Poll.PollTitle".TranslateSimple(), ColorLibrary.LightBlue);
-            ToolkitPolls.ToolkitPolls.SchedulePoll(builder.Build());
+            builder.WithTitle("ToolkitResearch.Windows.Poll.PollTitle".TranslateSimple(), "#95d0fc");
+            ToolkitPolls.ToolkitPolls.SchedulePoll(builder);
 
             return false;
         }
