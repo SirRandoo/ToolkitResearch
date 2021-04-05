@@ -17,6 +17,7 @@ namespace SirRandoo.ToolkitResearch
         public static int ResultsDuration = 10;
         private static string _completedDurationBuffer;
         private static string _resultsDurationBuffer;
+        internal static bool _pollsDisabled = false;
 
         public static void Draw(Rect canvas)
         {

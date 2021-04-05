@@ -35,6 +35,11 @@ namespace SirRandoo.ToolkitResearch.Harmony
         [HarmonyPriority(800)]
         public static void Postfix(ResearchProjectDef proj)
         {
+            if (Settings._pollsDisabled)
+            {
+                return;
+            }
+            
             try
             {
                 ToolkitResearch.StartNewPoll(proj);
