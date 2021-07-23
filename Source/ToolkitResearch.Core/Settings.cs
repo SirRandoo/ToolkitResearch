@@ -13,11 +13,14 @@ namespace SirRandoo.ToolkitResearch
         private static string _durationBuffer = Duration.ToString();
         public static bool OptionsInChat;
         public static bool ShowResearchDialog;
+        public static bool LimitToTechLevel;
         public static int CompletedDuration = 10;
         public static int ResultsDuration = 10;
         private static string _completedDurationBuffer;
         private static string _resultsDurationBuffer;
         internal static bool PollsDisabled = false;
+        internal static float PollX;
+        internal static float PollY;
 
         public static void Draw(Rect canvas)
         {
@@ -60,6 +63,12 @@ namespace SirRandoo.ToolkitResearch
             );
             listing.DrawDescription("ToolkitResearch.Settings.ShowResearchDialog.Description".TranslateSimple());
 
+            listing.CheckboxLabeled(
+                "ToolkitResearch.Settings.LimitToTechLevel.Label".TranslateSimple(),
+                ref LimitToTechLevel
+            );
+            listing.DrawDescription("ToolkitResearch.Settings.LimitToTechLevel.Description".TranslateSimple());
+
             listing.End();
         }
 
@@ -71,6 +80,9 @@ namespace SirRandoo.ToolkitResearch
             Scribe_Values.Look(ref CompletedDuration, "polls.completedDuration", 10);
             Scribe_Values.Look(ref OptionsInChat, "polls.sendToChat");
             Scribe_Values.Look(ref ShowResearchDialog, "behavior.researchDialog");
+            Scribe_Values.Look(ref LimitToTechLevel, "behavior.techLevelLimit");
+            Scribe_Values.Look(ref PollX, "polls.x");
+            Scribe_Values.Look(ref PollY, "polls.y");
         }
     }
 }

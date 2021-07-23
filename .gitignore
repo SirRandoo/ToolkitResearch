@@ -4,7 +4,7 @@ obj/
 riderModule.iml
 /_ReSharper.Caches/
 /.idea/.idea.ToolkitResearch/.idea/
-/1.2/Assemblies/
+/[0-9].[0-9]/Assemblies/
 /_PublisherPlus.xml
 /ToolkitResearch.sln.DotSettings.user
 /Compat/ToolkitPolls/*

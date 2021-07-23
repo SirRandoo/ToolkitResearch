@@ -21,12 +21,12 @@
 // SOFTWARE.
 
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using HarmonyLib;
 using JetBrains.Annotations;
 using SirRandoo.ToolkitPolls;
 using SirRandoo.ToolkitResearch.Helpers;
+using SirRandoo.ToolkitResearch.Models;
 using UnityEngine;
 using Verse;
 
@@ -40,35 +40,34 @@ namespace SirRandoo.ToolkitResearch.Compat
 
         public static IEnumerable<MethodBase> TargetMethods()
         {
-            yield return _startNewPollMethod ??= AccessTools.Method(typeof(ToolkitResearch), "StartNewPoll");
+            yield return _startNewPollMethod ??= AccessTools.Method(typeof(ResearchVoteHandler), "StartNewPoll");
         }
 
-        public static bool Prefix([CanBeNull] ResearchProjectDef project)
+        public static bool Prefix([NotNull] Poll poll)
         {
             var builder = new PollSetupBuilder();
-            
-            foreach (ResearchProjectDef proj in DefDatabase<ResearchProjectDef>.AllDefs.Where(p => p.CanStartNow)
-               .InRandomOrder()
-               .Take(PollSettings.MaxChoices))
+
+            foreach (Choice choice in poll.Choices)
             {
                 builder.WithChoice(
-                    proj.label?.CapitalizeFirst() ?? proj.defName,
-                    () => Current.Game.researchManager.currentProj = proj,
-                    proj.description
+                    choice.Project.label?.CapitalizeFirst() ?? choice.Project.defName,
+                    () => Current.Game.researchManager.currentProj = choice.Project,
+                    choice.Project.description
                 );
             }
 
-            if (project != null)
+            if (poll.CompletedProject != null)
             {
                 builder.WithCoverDelegate(
                     r =>
                     {
-                        ResearchProjectDef proj = project;
+                        ResearchProjectDef proj = poll.CompletedProject;
                         SettingsHelper.DrawLabel(
                             r,
                             "ToolkitResearch.Windows.Poll.ResearchComplete".Translate(proj.label),
                             TextAnchor.UpperLeft
                         );
+                        Current.Game?.GetComponent<ResearchVoteHandler>()?.DiscardPoll();
                     }
                 );
             }

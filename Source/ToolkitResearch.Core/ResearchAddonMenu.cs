@@ -26,17 +26,17 @@ namespace SirRandoo.ToolkitResearch
                     () =>
                     {
                         Find.ResearchManager.currentProj = null;
-                        ToolkitResearch.StartNewPoll(null);
+                        Current.Game?.GetComponent<ResearchVoteHandler>()?.DiscardPoll();
                     }
                 ),
                 new FloatMenuOption(
                     "ToolkitResearch.AddonMenu.TogglePollGen".TranslateSimple(),
                     () =>
                     {
-                        Settings._pollsDisabled = !Settings._pollsDisabled;
+                        Settings.PollsDisabled = !Settings.PollsDisabled;
 
                         Messages.Message(
-                            Settings._pollsDisabled
+                            Settings.PollsDisabled
                                 ? "ToolkitResearch.Messages.PollGenDisabled".TranslateSimple()
                                 : "ToolkitResearch.Messages.PollGenEnabled".TranslateSimple(),
                             MessageTypeDefOf.TaskCompletion
