@@ -20,11 +20,11 @@ namespace SirRandoo.ToolkitResearch
 
         public ResearchVoteHandler(Game game) { }
 
-        public Poll CurrentPoll { get; private set; }
+        public Poll CurrentPoll { get; set; }
 
         public override void ParseMessage(ITwitchMessage twitchMessage)
         {
-            if (CurrentPoll == null)
+            if (CurrentPoll == null || CurrentPoll.Choices.Count <= 0)
             {
                 return;
             }

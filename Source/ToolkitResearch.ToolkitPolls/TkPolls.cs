@@ -21,6 +21,7 @@
 // SOFTWARE.
 
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using HarmonyLib;
 using JetBrains.Annotations;
@@ -43,7 +44,8 @@ namespace SirRandoo.ToolkitResearch.Compat
             yield return _startNewPollMethod ??= AccessTools.Method(typeof(ResearchVoteHandler), "StartNewPoll");
         }
 
-        public static bool Prefix([NotNull] Poll poll)
+        [SuppressMessage("ReSharper", "InconsistentNaming")]
+        public static bool Prefix([NotNull] Poll poll, ResearchVoteHandler __instance)
         {
             var builder = new PollSetupBuilder();
 
@@ -67,14 +69,18 @@ namespace SirRandoo.ToolkitResearch.Compat
                             "ToolkitResearch.Windows.Poll.ResearchComplete".Translate(proj.label),
                             TextAnchor.UpperLeft
                         );
-                        Current.Game?.GetComponent<ResearchVoteHandler>()?.DiscardPoll();
+                        __instance.DiscardPoll();
                     }
                 );
             }
 
+
+            __instance.CurrentPoll = new Poll
+            {
+                Choices = new List<Choice>(), CoverTimer = 99999f, Timer = 99999f, ResultsTimer = 99999f
+            };
             builder.WithTitle("ToolkitResearch.Windows.Poll.PollTitle".TranslateSimple(), "#95d0fc");
             ToolkitPolls.ToolkitPolls.SchedulePoll(builder);
-
             return false;
         }
     }
