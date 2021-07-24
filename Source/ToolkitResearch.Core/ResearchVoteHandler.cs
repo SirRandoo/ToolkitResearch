@@ -58,7 +58,10 @@ namespace SirRandoo.ToolkitResearch
 
             var poll = new Poll
             {
-                CompletedProject = Find.ResearchManager.GetProgress(_lastProject) >= 100 ? _lastProject : null,
+                CompletedProject =
+                    _lastProject != null && Find.ResearchManager.GetProgress(_lastProject) >= 100
+                        ? _lastProject
+                        : null,
                 Timer = Settings.Duration,
                 ResultsTimer = Settings.ResultsDuration,
                 CoverTimer = Settings.CompletedDuration,
