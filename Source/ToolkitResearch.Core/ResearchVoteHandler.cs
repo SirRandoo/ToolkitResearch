@@ -91,7 +91,7 @@ namespace SirRandoo.ToolkitResearch
             StartNewPoll(poll);
         }
 
-        private void StartNewPoll(Poll poll)
+        private void StartNewPoll([NotNull] Poll poll)
         {
         #if DEBUG
             poll.Timer = 10;
@@ -102,6 +102,13 @@ namespace SirRandoo.ToolkitResearch
             CurrentPoll = poll;
             Find.WindowStack.Add(new ResearchPollDialog());
             _lastProject = null;
+
+            TwitchWrapper.SendChatMessage("ToolkitResearch.Messages.VoteMessage".TranslateSimple());
+            for (var index = 0; index < poll.Choices.Count; index++)
+            {
+                Choice choice = poll.Choices[index];
+                TwitchWrapper.SendChatMessage($"[{index + 1}] {choice.Label}");
+            }
         }
 
         public override void GameComponentUpdate()
