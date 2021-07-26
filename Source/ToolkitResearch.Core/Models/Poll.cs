@@ -118,10 +118,10 @@ namespace SirRandoo.ToolkitResearch.Models
                 }
 
                 var barRect = new Rect(
-                    region.x,
-                    region.y,
-                    Mathf.FloorToInt(region.width * (choice.Votes.Count / _totalVotes)),
-                    region.height - 4f
+                    0f,
+                    lineRect.y,
+                    Mathf.FloorToInt(lineRect.width * (_totalVotes <= 0 ? 1f : choice.Votes.Count / _totalVotes)),
+                    lineRect.height - 4f
                 );
                 Widgets.DrawHighlightSelected(barRect);
             }
