@@ -96,7 +96,7 @@ namespace SirRandoo.ToolkitResearch.Windows
             var timerRect = new Rect(0f, pollRect.y + pollRect.height, region.width, Text.LineHeight);
 
             GUI.BeginGroup(pollRect);
-            switch (_voteHandler.CurrentPoll.State)
+            switch (_voteHandler.CurrentPoll?.State)
             {
                 case PollState.Cover:
                     optionalTitle = _completeTitleText;
@@ -110,7 +110,7 @@ namespace SirRandoo.ToolkitResearch.Windows
                     optionalTitle = _resultsTitleText;
                     _voteHandler.CurrentPoll.DrawResults(pollRect);
                     break;
-                case PollState.Done:
+                default:
                     Close();
                     break;
             }
@@ -118,7 +118,12 @@ namespace SirRandoo.ToolkitResearch.Windows
             GUI.EndGroup();
 
             GUI.BeginGroup(timerRect);
-            DrawTimer(timerRect.AtZero());
+
+            if (_voteHandler.CurrentPoll != null)
+            {
+                DrawTimer(timerRect.AtZero());
+            }
+
             GUI.EndGroup();
 
             GUI.EndGroup();
@@ -163,6 +168,11 @@ namespace SirRandoo.ToolkitResearch.Windows
         public override void Close(bool doCloseSound = true)
         {
             base.Close(doCloseSound);
+
+            if (_voteHandler.CurrentPoll == null)
+            {
+                return;
+            }
 
             _voteHandler.CurrentPoll.Timer = -10f;
             _voteHandler.CurrentPoll.CoverTimer = -10f;

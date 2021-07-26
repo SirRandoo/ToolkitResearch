@@ -93,6 +93,12 @@ namespace SirRandoo.ToolkitResearch
 
         private void StartNewPoll(Poll poll)
         {
+        #if DEBUG
+            poll.Timer = 10;
+            poll.CoverTimer = 10;
+            poll.ResultsTimer = 10;
+        #endif
+
             CurrentPoll = poll;
             Find.WindowStack.Add(new ResearchPollDialog());
             _lastProject = null;

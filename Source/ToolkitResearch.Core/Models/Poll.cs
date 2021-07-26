@@ -99,7 +99,7 @@ namespace SirRandoo.ToolkitResearch.Models
                 Choice choice = Choices[index];
                 Rect lineRect = listing.GetRect(Text.LineHeight);
 
-                var indexRect = new Rect(0f, lineRect.y, 10f, lineRect.height);
+                var indexRect = new Rect(0f, lineRect.y, 25f, lineRect.height);
                 var nameRect = new Rect(
                     indexRect.x + indexRect.width + 2f,
                     lineRect.y,
