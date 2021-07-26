@@ -103,6 +103,11 @@ namespace SirRandoo.ToolkitResearch
             Find.WindowStack.Add(new ResearchPollDialog());
             _lastProject = null;
 
+            if (!Settings.OptionsInChat)
+            {
+                return;
+            }
+
             TwitchWrapper.SendChatMessage("ToolkitResearch.Messages.VoteMessage".TranslateSimple());
             for (var index = 0; index < poll.Choices.Count; index++)
             {
