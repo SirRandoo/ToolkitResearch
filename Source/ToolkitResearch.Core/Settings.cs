@@ -58,12 +58,6 @@ namespace SirRandoo.ToolkitResearch
             listing.DrawDescription("ToolkitResearch.Settings.OptionsInChat.Description".TranslateSimple());
 
             listing.CheckboxLabeled(
-                "ToolkitResearch.Settings.ShowResearchDialog.Label".TranslateSimple(),
-                ref ShowResearchDialog
-            );
-            listing.DrawDescription("ToolkitResearch.Settings.ShowResearchDialog.Description".TranslateSimple());
-
-            listing.CheckboxLabeled(
                 "ToolkitResearch.Settings.LimitToTechLevel.Label".TranslateSimple(),
                 ref LimitToTechLevel
             );
@@ -79,7 +73,6 @@ namespace SirRandoo.ToolkitResearch
             Scribe_Values.Look(ref ResultsDuration, "polls.resultsDuration", 10);
             Scribe_Values.Look(ref CompletedDuration, "polls.completedDuration", 10);
             Scribe_Values.Look(ref OptionsInChat, "polls.sendToChat");
-            Scribe_Values.Look(ref ShowResearchDialog, "behavior.researchDialog");
             Scribe_Values.Look(ref LimitToTechLevel, "behavior.techLevelLimit");
             Scribe_Values.Look(ref PollX, "polls.x");
             Scribe_Values.Look(ref PollY, "polls.y");
