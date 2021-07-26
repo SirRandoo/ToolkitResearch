@@ -48,6 +48,7 @@ namespace SirRandoo.ToolkitResearch
                 }
 
                 container.Add(project);
+                projects.Remove(project);
             }
 
             return container;
