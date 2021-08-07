@@ -51,7 +51,7 @@ namespace SirRandoo.ToolkitResearch
 
         public override void GameComponentTick()
         {
-            if (Find.ResearchManager.currentProj != null || CurrentPoll != null)
+            if (Find.ResearchManager.currentProj != null || CurrentPoll != null || Settings.PollsDisabled)
             {
                 return;
             }
