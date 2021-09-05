@@ -45,7 +45,7 @@ namespace SirRandoo.ToolkitResearch.Compat
         }
 
         [SuppressMessage("ReSharper", "InconsistentNaming")]
-        public static bool Prefix([NotNull] Poll poll, ResearchVoteHandler __instance)
+        public static bool Prefix([NotNull] Poll poll, [NotNull] ResearchVoteHandler __instance)
         {
             var builder = new PollSetupBuilder();
 
@@ -53,7 +53,11 @@ namespace SirRandoo.ToolkitResearch.Compat
             {
                 builder.WithChoice(
                     choice.Project.label?.CapitalizeFirst() ?? choice.Project.defName,
-                    () => Current.Game.researchManager.currentProj = choice.Project,
+                    () =>
+                    {
+                        Current.Game.researchManager.currentProj = choice.Project;
+                        __instance.DiscardPoll();
+                    },
                     choice.Project.description
                 );
             }
@@ -69,7 +73,6 @@ namespace SirRandoo.ToolkitResearch.Compat
                             "ToolkitResearch.Windows.Poll.ResearchComplete".Translate(proj.label),
                             TextAnchor.UpperLeft
                         );
-                        __instance.DiscardPoll();
                     }
                 );
             }
