@@ -20,5 +20,5 @@
     <ToolkitResearch.Settings.ShowResearchDialog.Description>Whenever a research is completed, RimWorld shows a dialog informing you of what you finished researching. This setting disables this dialog and moves this information to its own dialog for less disruptive gameplay.</ToolkitResearch.Settings.ShowResearchDialog.Description>
 
     <ToolkitResearch.Settings.LimitToTechLevel.Label>Limit options to the colony's tech level.</ToolkitResearch.Settings.LimitToTechLevel.Label>
-    <ToolkitResearch.Settings.LimitToTechLevel.Description>Whether or not the mod will only include choices within the colony's tech level.</ToolkitResearch.Settings.LimitToTechLevel.Description>
+    <ToolkitResearch.Settings.LimitToTechLevel.Description>Whether or not the mod will only include choices within the colony's tech level. Requires Tech Advancing.</ToolkitResearch.Settings.LimitToTechLevel.Description>
 </LanguageData>
