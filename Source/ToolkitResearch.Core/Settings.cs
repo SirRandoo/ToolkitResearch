@@ -13,6 +13,7 @@ namespace SirRandoo.ToolkitResearch
         private static string _durationBuffer = Duration.ToString();
         public static bool OptionsInChat;
         public static bool ShowResearchDialog;
+        public static bool TieredMode;
         public static bool LimitToTechLevel;
         public static int CompletedDuration = 10;
         public static int ResultsDuration = 10;
@@ -63,6 +64,9 @@ namespace SirRandoo.ToolkitResearch
             );
             listing.DrawDescription("ToolkitResearch.Settings.LimitToTechLevel.Description".TranslateSimple());
 
+            listing.CheckboxLabeled("ToolkitResearch.Settings.LimitToTechTier.Label".TranslateSimple(), ref TieredMode);
+            listing.DrawDescription("ToolkitResearch.Settings.LimitToTechTier.Description".TranslateSimple());
+
             listing.End();
         }
 
@@ -74,6 +78,7 @@ namespace SirRandoo.ToolkitResearch
             Scribe_Values.Look(ref CompletedDuration, "polls.completedDuration", 10);
             Scribe_Values.Look(ref OptionsInChat, "polls.sendToChat");
             Scribe_Values.Look(ref LimitToTechLevel, "behavior.techLevelLimit");
+            Scribe_Values.Look(ref TieredMode, "behavior.tiered");
             Scribe_Values.Look(ref PollX, "polls.x");
             Scribe_Values.Look(ref PollY, "polls.y");
         }

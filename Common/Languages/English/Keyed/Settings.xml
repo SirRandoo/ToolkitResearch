@@ -21,4 +21,7 @@
 
     <ToolkitResearch.Settings.LimitToTechLevel.Label>Limit options to the colony's tech level.</ToolkitResearch.Settings.LimitToTechLevel.Label>
     <ToolkitResearch.Settings.LimitToTechLevel.Description>Whether or not the mod will only include choices within the colony's tech level. Requires Tech Advancing.</ToolkitResearch.Settings.LimitToTechLevel.Description>
+
+    <ToolkitResearch.Settings.LimitToTechTier.Label>Tiered mode</ToolkitResearch.Settings.LimitToTechTier.Label>
+    <ToolkitResearch.Settings.LimitToTechTier.Description>When enabled, the mod will only include research options from the lowest uncompleted research tier. If there's only one research left, the mod will automatically queue it instead.</ToolkitResearch.Settings.LimitToTechTier.Description>
 </LanguageData>

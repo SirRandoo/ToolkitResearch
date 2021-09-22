@@ -38,6 +38,12 @@ namespace SirRandoo.ToolkitResearch
                .Where(p => !p.IsFinished && p.CanStartNow)
                .ToList();
 
+            if (Settings.TieredMode)
+            {
+                int lowestUncompleted = projects.Min(r => (int)r.techLevel);
+                projects.RemoveAll(r => (int)r.techLevel > lowestUncompleted);
+            }
+
             var container = new List<ResearchProjectDef>();
 
             while (container.Count < Settings.MaximumOptions)
