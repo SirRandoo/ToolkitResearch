@@ -86,6 +86,7 @@ namespace SirRandoo.ToolkitResearch
             if (poll.Choices.Count == 1)
             {
                 Find.ResearchManager.currentProj = poll.Choices.FirstOrDefault()?.Project;
+                return;
             }
 
             StartNewPoll(poll);
