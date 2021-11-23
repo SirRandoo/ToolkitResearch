@@ -1,5 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 
 <LanguageData>
+    <ToolkitResearch.Messages.Overriden>Disabled by ToolkitPolls</ToolkitResearch.Messages.Overriden>
     <ToolkitResearch.Messages.VoteMessage>Vote on the next research project:</ToolkitResearch.Messages.VoteMessage>
+    <ToolkitResearch.Messages.InvalidMaximumOptions>Research polls may only have between 2 to 20 choices. A value outside this range will not be saved.</ToolkitResearch.Messages.InvalidMaximumOptions>
+    <ToolkitResearch.Messages.InvalidDuration>Research polls may only run anywhere between 60 seconds to 600 seconds, or between 1-10 minutes. A value outside this range will not be saved.</ToolkitResearch.Messages.InvalidDuration>
+    <ToolkitResearch.Messages.InvalidResultsDuration>The results page of a research poll may only run anywhere between 0 to 600 seconds, or 0-10 minutes. A value outside this range will not be saved.</ToolkitResearch.Messages.InvalidResultsDuration>
+    <ToolkitResearch.Messages.InvalidCompletedDuration>The "research completed" page of a research poll may only run anywhere between 0 and 600 seconds, or 0-10 minutes. A value outside this range will not be saved.</ToolkitResearch.Messages.InvalidCompletedDuration>
+    <ToolkitResearch.Messages.ToolkitPolls>This setting doesn't affect research polls while ToolkitPolls is enabled. You would need to change the relevant setting in the settings menu for ToolkitPolls.</ToolkitResearch.Messages.ToolkitPolls>
 </LanguageData>

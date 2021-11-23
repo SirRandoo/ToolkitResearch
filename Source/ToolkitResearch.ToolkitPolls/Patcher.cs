@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using HarmonyLib;
 using JetBrains.Annotations;
 using Verse;
 
@@ -10,7 +11,7 @@ namespace SirRandoo.ToolkitResearch.Compat
     {
         static Patcher()
         {
-            new HarmonyLib.Harmony("com.sirrandoo.tkresearch.compat").PatchAll(Assembly.GetExecutingAssembly());
+            new Harmony("com.sirrandoo.tkresearch.compat").PatchAll(Assembly.GetExecutingAssembly());
         }
     }
 }

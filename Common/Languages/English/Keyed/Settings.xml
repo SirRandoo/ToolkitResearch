@@ -3,19 +3,19 @@
 <LanguageData>
     <ToolkitResearch.Settings.Options.Label>Maxmimum number of choices</ToolkitResearch.Settings.Options.Label>
     <ToolkitResearch.Settings.Options.Description>The maximum number of research options that will ever appear in a given poll.</ToolkitResearch.Settings.Options.Description>
-    
+
     <ToolkitResearch.Settings.Duration.Label>Poll duration</ToolkitResearch.Settings.Duration.Label>
     <ToolkitResearch.Settings.Duration.Description>The maximum number of seconds a poll will run for. While there is no limit to the amount of seconds you can put in this field, it's advised to keep it within reason.</ToolkitResearch.Settings.Duration.Description>
-    
+
     <ToolkitResearch.Settings.CompletedDuration.Label>Completed research duration</ToolkitResearch.Settings.CompletedDuration.Label>
     <ToolkitResearch.Settings.CompletedDuration.Description>The number of seconds the poll dialog will display what you've finished researching. Setting this to 0 will disable the relevant feature in the poll dialog.</ToolkitResearch.Settings.CompletedDuration.Description>
-    
+
     <ToolkitResearch.Settings.ResultsDuration.Label>Poll results duration</ToolkitResearch.Settings.ResultsDuration.Label>
     <ToolkitResearch.Settings.ResultsDuration.Description>The number of seconds the results screen of the poll dialog will display for.</ToolkitResearch.Settings.ResultsDuration.Description>
-    
+
     <ToolkitResearch.Settings.OptionsInChat.Label>Send the current poll's options to chat.</ToolkitResearch.Settings.OptionsInChat.Label>
     <ToolkitResearch.Settings.OptionsInChat.Description>Whether or not the mod will send the current poll's options to chat. Viewers can vote on these options by typing the number of the option they want to cast their vote for, or prefix it with #.</ToolkitResearch.Settings.OptionsInChat.Description>
-    
+
     <ToolkitResearch.Settings.ShowResearchDialog.Label>Show research dialog.</ToolkitResearch.Settings.ShowResearchDialog.Label>
     <ToolkitResearch.Settings.ShowResearchDialog.Description>Whenever a research is completed, RimWorld shows a dialog informing you of what you finished researching. This setting disables this dialog and moves this information to its own dialog for less disruptive gameplay.</ToolkitResearch.Settings.ShowResearchDialog.Description>
 

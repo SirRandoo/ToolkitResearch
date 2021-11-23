@@ -68,11 +68,7 @@ namespace SirRandoo.ToolkitResearch.Compat
                     r =>
                     {
                         ResearchProjectDef proj = poll.CompletedProject;
-                        SettingsHelper.DrawLabel(
-                            r,
-                            "ToolkitResearch.Windows.Poll.ResearchComplete".Translate(proj.label),
-                            TextAnchor.UpperLeft
-                        );
+                        SettingsHelper.DrawLabel(r, "ToolkitResearch.Windows.Poll.ResearchComplete".Translate(proj.label), TextAnchor.UpperLeft);
                     }
                 );
             }
@@ -80,7 +76,10 @@ namespace SirRandoo.ToolkitResearch.Compat
 
             __instance.CurrentPoll = new Poll
             {
-                Choices = new List<Choice>(), CoverTimer = 99999f, Timer = 99999f, ResultsTimer = 99999f
+                Choices = new List<Choice>(),
+                CoverTimer = 99999f,
+                Timer = 99999f,
+                ResultsTimer = 99999f
             };
             builder.WithTitle("ToolkitResearch.Windows.Poll.PollTitle".TranslateSimple(), "#95d0fc");
             ToolkitPolls.ToolkitPolls.SchedulePoll(builder);

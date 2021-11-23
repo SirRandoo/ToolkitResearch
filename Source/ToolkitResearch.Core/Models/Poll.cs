@@ -23,9 +23,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using SirRandoo.ToolkitResearch.Helpers;
 using UnityEngine;
 using Verse;
-using SettingsHelper = SirRandoo.ToolkitResearch.Helpers.SettingsHelper;
 
 namespace SirRandoo.ToolkitResearch.Models
 {
@@ -33,9 +33,9 @@ namespace SirRandoo.ToolkitResearch.Models
 
     public class Poll
     {
-        private Choice _winner;
-        private float _totalVotes;
         private string _completedText;
+        private float _totalVotes;
+        private Choice _winner;
 
         public float Timer { get; set; }
         public float CoverTimer { get; set; }
@@ -46,11 +46,7 @@ namespace SirRandoo.ToolkitResearch.Models
 
         public void DrawCover(Rect region)
         {
-            SettingsHelper.DrawLabel(
-                region,
-                _completedText ??= "ToolkitResearch.Windows.Poll.ResearchComplete".Translate(CompletedProject.label),
-                TextAnchor.UpperLeft
-            );
+            SettingsHelper.DrawLabel(region, _completedText ??= "ToolkitResearch.Windows.Poll.ResearchComplete".Translate(CompletedProject.label), TextAnchor.UpperLeft);
         }
 
         public void DrawPoll(Rect region)
@@ -66,12 +62,7 @@ namespace SirRandoo.ToolkitResearch.Models
                 Rect lineRect = listing.GetRect(Text.LineHeight);
 
                 var indexRect = new Rect(0f, lineRect.y, 25f, lineRect.height);
-                var nameRect = new Rect(
-                    indexRect.x + indexRect.width + 2f,
-                    lineRect.y,
-                    lineRect.width - 39f,
-                    lineRect.height
-                );
+                var nameRect = new Rect(indexRect.x + indexRect.width + 2f, lineRect.y, lineRect.width - 39f, lineRect.height);
                 var votesRect = new Rect(lineRect.x + lineRect.width - 10f, lineRect.y, 10f, lineRect.height);
 
                 choice.DrawBar(lineRect, choice.Votes.Count / _totalVotes);
@@ -100,12 +91,7 @@ namespace SirRandoo.ToolkitResearch.Models
                 Rect lineRect = listing.GetRect(Text.LineHeight);
 
                 var indexRect = new Rect(0f, lineRect.y, 25f, lineRect.height);
-                var nameRect = new Rect(
-                    indexRect.x + indexRect.width + 2f,
-                    lineRect.y,
-                    lineRect.width - 24f,
-                    lineRect.height
-                );
+                var nameRect = new Rect(indexRect.x + indexRect.width + 2f, lineRect.y, lineRect.width - 24f, lineRect.height);
                 var votesRect = new Rect(lineRect.x + lineRect.width - 10f, lineRect.y, 10f, lineRect.height);
 
                 SettingsHelper.DrawLabel(indexRect, $"#{index + 1}");
@@ -117,12 +103,7 @@ namespace SirRandoo.ToolkitResearch.Models
                     continue;
                 }
 
-                var barRect = new Rect(
-                    0f,
-                    lineRect.y,
-                    Mathf.FloorToInt(lineRect.width * (_totalVotes <= 0 ? 1f : choice.Votes.Count / _totalVotes)),
-                    lineRect.height - 4f
-                );
+                var barRect = new Rect(0f, lineRect.y, Mathf.FloorToInt(lineRect.width * (_totalVotes <= 0 ? 1f : choice.Votes.Count / _totalVotes)), lineRect.height - 4f);
                 Widgets.DrawHighlightSelected(barRect);
             }
 

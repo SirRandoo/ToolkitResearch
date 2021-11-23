@@ -47,20 +47,13 @@ namespace SirRandoo.ToolkitResearch.Windows
             preventCameraMotion = false;
         }
 
-        public override Vector2 InitialSize =>
-            new Vector2(310, 150 + Text.SmallFontHeight * Mathf.Min(Settings.MaximumOptions + 1, 8));
+        public override Vector2 InitialSize => new Vector2(310, 150 + Text.SmallFontHeight * Mathf.Min(Settings.MaximumOptions + 1, 8));
 
         private void GetTranslations()
         {
-            _pollTitleText = "ToolkitResearch.Windows.Poll.PollTitle".TranslateSimple()
-               .ColorTagged(ColorLibrary.LightBlue)
-               .Tagged("b");
-            _resultsTitleText = "ToolkitResearch.Windows.Poll.ResultsTitle".TranslateSimple()
-               .ColorTagged(ColorLibrary.LightBlue)
-               .Tagged("b");
-            _completeTitleText = "ToolkitResearch.Windows.Poll.CompleteTitle".TranslateSimple()
-               .ColorTagged(ColorLibrary.LightBlue)
-               .Tagged("b");
+            _pollTitleText = "ToolkitResearch.Windows.Poll.PollTitle".TranslateSimple().ColorTagged(ColorLibrary.LightBlue).Tagged("b");
+            _resultsTitleText = "ToolkitResearch.Windows.Poll.ResultsTitle".TranslateSimple().ColorTagged(ColorLibrary.LightBlue).Tagged("b");
+            _completeTitleText = "ToolkitResearch.Windows.Poll.CompleteTitle".TranslateSimple().ColorTagged(ColorLibrary.LightBlue).Tagged("b");
         }
 
         public override void PreOpen()

@@ -41,7 +41,13 @@ namespace SirRandoo.ToolkitResearch
                 return;
             }
 
-            _votes.Enqueue(new Vote {Viewer = twitchMessage.Username.ToLowerInvariant(), Index = vote});
+            _votes.Enqueue(
+                new Vote
+                {
+                    Viewer = twitchMessage.Username.ToLowerInvariant(),
+                    Index = vote
+                }
+            );
         }
 
         public void DiscardPoll()
@@ -58,10 +64,7 @@ namespace SirRandoo.ToolkitResearch
 
             var poll = new Poll
             {
-                CompletedProject =
-                    _lastProject != null && Find.ResearchManager.GetProgress(_lastProject) >= 100
-                        ? _lastProject
-                        : null,
+                CompletedProject = _lastProject != null && Find.ResearchManager.GetProgress(_lastProject) >= 100 ? _lastProject : null,
                 Timer = Settings.Duration,
                 ResultsTimer = Settings.ResultsDuration,
                 CoverTimer = Settings.CompletedDuration,
@@ -94,11 +97,11 @@ namespace SirRandoo.ToolkitResearch
 
         private void StartNewPoll([NotNull] Poll poll)
         {
-        #if DEBUG
+#if DEBUG
             poll.Timer = 10;
             poll.CoverTimer = 10;
             poll.ResultsTimer = 10;
-        #endif
+#endif
 
             CurrentPoll = poll;
             Find.WindowStack.Add(new ResearchPollDialog());

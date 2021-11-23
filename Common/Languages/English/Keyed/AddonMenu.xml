@@ -4,7 +4,7 @@
     <ToolkitResearch.AddonMenu.Settings>Settings</ToolkitResearch.AddonMenu.Settings>
     <ToolkitResearch.AddonMenu.AbandonProject>Abandon project</ToolkitResearch.AddonMenu.AbandonProject>
     <ToolkitResearch.AddonMenu.TogglePollGen>Toggle mod</ToolkitResearch.AddonMenu.TogglePollGen>
-    
+
     <ToolkitResearch.Messages.PollGenEnabled>ToolkitResearch will create polls. (ENABLED)</ToolkitResearch.Messages.PollGenEnabled>
     <ToolkitResearch.Messages.PollGenDisabled>ToolkitResearch will not create polls. (DISABLED)</ToolkitResearch.Messages.PollGenDisabled>
 </LanguageData>
