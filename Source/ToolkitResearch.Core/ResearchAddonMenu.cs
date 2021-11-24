@@ -2,6 +2,7 @@
 using JetBrains.Annotations;
 using RimWorld;
 using SirRandoo.ToolkitResearch.Helpers;
+using SirRandoo.ToolkitResearch.Windows;
 using ToolkitCore.Interfaces;
 using Verse;
 
@@ -19,7 +20,7 @@ namespace SirRandoo.ToolkitResearch
             {
                 new FloatMenuOption(
                     "ToolkitResearch.AddonMenu.Settings".TranslateSimple(),
-                    () => SettingsHelper.OpenSettingsMenuFor(LoadedModManager.GetMod<ToolkitResearch>())
+                    () => Find.WindowStack.Add(new ResearchSettingsWindow())
                 ),
                 new FloatMenuOption(
                     "ToolkitResearch.AddonMenu.AbandonProject".TranslateSimple(),
