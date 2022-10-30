@@ -11,8 +11,6 @@ namespace SirRandoo.ToolkitResearch.Helpers
 {
     public static class SettingsHelper
     {
-        private static readonly FieldInfo SelectedModField = AccessTools.Field(typeof(Dialog_ModSettings), "selMod");
-
         private static readonly GameFont[] GameFonts = Enum.GetNames(typeof(GameFont))
            .Select(f => (GameFont)Enum.Parse(typeof(GameFont), f))
            .OrderByDescending(f => (int)f)
@@ -370,8 +368,7 @@ namespace SirRandoo.ToolkitResearch.Helpers
 
         public static void OpenSettingsMenuFor(Mod modInstance)
         {
-            var settings = new Dialog_ModSettings();
-            SelectedModField.SetValue(settings, modInstance);
+            var settings = new Dialog_ModSettings(modInstance);
 
             Find.WindowStack.Add(settings);
         }
